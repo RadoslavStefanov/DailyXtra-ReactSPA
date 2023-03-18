@@ -1,9 +1,31 @@
+import React, { useState } from 'react';
+
 import { Container, Row, Col } from "react-bootstrap";
+import calcTimeAgo from '../../../services/timeCalculator';
 import PopularTopics from "../Floater/PopularTopics";
 import UserPanel from "../Floater/UserPanel";
 
+import style from './Content.module.css';
+
+
 export default function MainContent(key)
 {
+    const [currentColorIndex, setCurrentColorIndex] = useState(0);
+      
+    const articles = [
+        { id: 1, header: "Flux Pavilion joins a “new age of dubstep” and releases newest single, 'Paradise'", content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+        { id: 2, header: 'Second Article', content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+        { id: 3, header: 'Third Article', content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
+      ];
+    
+    const getRowColor = (index) => {
+        return index % 2 === currentColorIndex ? '#F0FFF0' : '#ffffff';
+    };
+
+    const getBorder = (index) => {
+        return index % 2 === currentColorIndex ? '5px solid #4fbe1d' : '';
+    };
+
     console.log(key.kay)
     return(
         <Container fluid className='px-5'>
@@ -12,44 +34,30 @@ export default function MainContent(key)
             <PopularTopics/>
           </Col>
             <Col md={6} style={{minHeight:"720px"}}>
-              <div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec
-                    est bibendum, pharetra massa vitae, consequat justo. In hac
-                    habitasse platea dictumst. Etiam fermentum quam ac sapien
-                    pulvinar, sit amet finibus elit viverra. In hac habitasse platea
-                    dictumst. Sed lacinia semper nunc, eu pretium augue pharetra in.
-                    Sed pulvinar felis vitae sem blandit, sit amet malesuada augue
-                    venenatis. Sed ultricies diam id sapien congue faucibus. Sed eu
-                    nunc nulla. Morbi nec metus eu velit facilisis dignissim. Nulla
-                    facilisi. Sed aliquam interdum tincidunt. Vestibulum euismod,
-                    magna id interdum volutpat, augue leo blandit mi, sit amet
-                    volutpat velit enim nec arcu.
-                  </p>
-                  <p>
-                    Maecenas lacinia pulvinar metus, vel facilisis risus vulputate a.
-                    Suspendisse nec arcu at nisi ultricies elementum sit amet sit amet
-                    enim. Donec aliquet velit ac hendrerit iaculis. Sed imperdiet
-                    pharetra sapien ac consequat. Maecenas maximus leo ut est
-                    facilisis, id consequat magna laoreet. Aliquam fermentum malesuada
-                    justo, vel pulvinar tortor dign 
-                  </p>
-                  <p>
-                    Duis sed ex massa. Morbi faucibus, massa non ullamcorper
-                    ullamcorper, felis risus auctor libero, in finibus ipsum justo
-                    non nisl. Curabitur sed congue neque. Sed id felis auctor,
-                    consectetur quam ac, interdum ipsum. Nullam hendrerit est vel
-                    nulla laoreet, vitae tincidunt lorem dapibus. Sed at pharetra
-                    velit. Morbi fringilla quam ac tellus eleifend, eu vestibulum
-                    neque dictum. Nullam euismod augue quis odio pretium viverra.
-                    Fusce a odio sapien. Donec et elit elit. Duis eu tortor velit. Sed
-                    in quam in arcu euismod pretium. Suspendisse convallis commodo
-                    sem, vel consectetur justo varius nec. Donec at ligula a elit
-                    pellentesque vulputate sed a nisl. Sed eget diam vitae diam
-                    placerat commodo eget ut dolor. Phasellus commodo malesuada enim,
-                    non vulputate turpis lobortis eu.
-                  </p>
-                </div>
+                <table className={style.contentTable}>
+                    <tbody>
+                        {articles.map((article, index) => (
+                        <tr key={article.id} className={style.articleRow} style={{ backgroundColor: getRowColor(index), borderLeft: getBorder(index)}}>
+                            <td>
+                                <div className={style.articleImage} style={{background:"url(https://www.youredm.com/wp-content/uploads/2021/01/Flux-Pavilion-Press-Shot-1-2020-Fiona-Garden-1-750x500.jpg)"}}></div>
+                                <div className="articleInfo">
+                                    <a className={style.articleHeader} href="https://www.reviewgeek.com/148545/7-eleven-will-charge-your-ev-while-you-guzzle-a-slurpee/">{article.header}</a>
+                                    <p>🕒{calcTimeAgo("2023-03-18T17:26:55Z")} | 👨‍🎨Cory Gunther</p>
+                                    <p className={style.articleDescription}>In the future, when you stop for a Big Gulp fountain drink or slurpee at 7-Eleven, there’s a good chance you’ll find a spot to recharge your electric vehicle. The famous convenience store is launching 7Charge, a massive new EV fast-charging network.</p>
+                                </div>
+                                <div style={{display:"block"}}>
+                                    <div className={style.articleControls}>
+                                        <div className={style.articleControlsItem}>| 👁️View</div>
+                                        <div className={style.articleControlsItem}>| 📑Check original</div>
+                                        <div className={style.articleControlsItem}>| 💾Save</div>
+                                        <div className={style.articleControlsItem}>| 🧡Like</div>
+                                    </div>
+                                </div>                                
+                            </td>
+                        </tr>
+                        ))}
+                    </tbody>
+                </table>
             </Col>
             <Col md={3} className="position-sticky">
               <UserPanel/>
