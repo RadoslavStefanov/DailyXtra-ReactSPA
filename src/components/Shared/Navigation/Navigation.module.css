@@ -1,0 +1,16 @@
+.navLogo{
+    width: 50%;
+}
+
+.accentNavBtn{
+    background-color: #4fbe1d;
+    color: rgb(68, 68, 68);
+    font-weight: 600;
+    border-radius: 1rem;
+}
+
+.dxaNavLink:hover{
+    border-bottom: 1px solid #4fbe1d;
+    font-weight: 400;
+    transition: ease-in-out;
+}
