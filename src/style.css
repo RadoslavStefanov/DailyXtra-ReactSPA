@@ -16,7 +16,45 @@
     top: 0;
 }
 
-h3{
+.floaterRight{
+    text-align: right;
+}
+
+.floaterRight .userImgSmall{
+    background-size: cover!important;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    max-width: 40%;
+    max-height: 100%;
+    margin-left: 0.5rem;
+    margin-bottom: -0.2rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border: 2px solid #4fbe1d;
+}
+
+.floaterRight strong{
+    position: relative;
+    font-size: 1.5rem;
+    color: #495057;
+    bottom: 5px;
+}
+
+.floaterRight .list-unstyled
+{
+    margin-top: 1rem;
+    font-size: 1.4rem;
+}
+
+.floaterRight .list-unstyled li
+{
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    border-right: 3px solid #4fbe1d;
+}
+
+h3, .dxa-underlined{
     border-bottom: 3px solid #4fbe1d;
     width: fit-content;
 }
@@ -30,7 +68,7 @@ h3{
     border-left: 3px solid #4fbe1d;
 }
 
-.dxa-popular p:hover{
+.dxa-popular p:hover, .floaterRight .list-unstyled li:hover{
     font-size: 1.4rem;
     border-left: 8px solid #4fbe1d;
     border-bottom: 2px solid #4fbe1d;
@@ -39,6 +77,12 @@ h3{
     transition-duration: 0.2s;
 }
 
+.floaterRight .list-unstyled li:hover{
+    border-left:none ;
+    border-right: 8px solid #4fbe1d;
+}
+
 .d-block{
     max-height: 30rem;
 }
+

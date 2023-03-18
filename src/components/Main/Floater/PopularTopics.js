@@ -8,7 +8,7 @@ export default function PopularTopics()
         },{
           name: '🎮Entertainment'
         },{
-          name: '📱Entertainment'
+          name: '📱Tech World'
         },
       ];
 
