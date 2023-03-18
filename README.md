@@ -20,4 +20,4 @@ To get started with DailyXtra, you will need to follow these steps:
 
 
 #Pictures
-![image](https://user-images.githubusercontent.com/72268734/226077706-34ab19dc-7937-474b-960c-30848d313e5a.png)
+![image](https://user-images.githubusercontent.com/72268734/226129560-e5b16e26-2c15-49c1-83b6-ad40848c6c21.png)
