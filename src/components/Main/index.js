@@ -27,7 +27,7 @@ function Main() {
       <Tab eventKey="foryou" title="❤️ForYou" disabled>
       </Tab>
     </Tabs>
-    <MainContent kay={key}/>
+    <MainContent k={key}/>
     </>    
   );
 }

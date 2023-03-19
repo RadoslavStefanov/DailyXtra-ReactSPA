@@ -86,3 +86,6 @@ h3, .dxa-underlined{
     max-height: 30rem;
 }
 
+.articleInfo{
+    min-height: 180px;;
+}

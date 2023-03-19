@@ -7,6 +7,11 @@
     margin-bottom: 1rem;
 }
 
+.contentTable td{
+    width: 100%;
+    display: block;
+}
+
 .contentTable .articleHeader{
     font-size: 1.3rem;
     color: #3a3d40;
@@ -45,16 +50,18 @@
 }
 
 .articleControlsItem {
-flex: 1;
-padding: 10px;
-text-align: center;
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #3a3d40;
 }
 
 .articleControlsItem:hover{
-background-color: #4fbe1d;
-cursor: pointer;
-color: white;
-font-weight: 600;
+    background-color: #4fbe1d;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
 }
 
 @media screen and (max-width: 768px) {
