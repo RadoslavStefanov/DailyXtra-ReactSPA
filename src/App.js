@@ -1,5 +1,3 @@
-import {Routes, Route} from "react-router-dom"
-
 import React from "react";
 import Navigation from "./components/Shared/Navigation";
 import Footer from "./components/Shared/Footer";

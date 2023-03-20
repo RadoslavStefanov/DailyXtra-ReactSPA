@@ -89,3 +89,11 @@ h3, .dxa-underlined{
 .articleInfo{
     min-height: 180px;;
 }
+
+a.selected{
+    border: 2px solid #4fbe1d;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom: none;
+    box-shadow: 0px 4px 0px -1.5px rgba(255,255,255,1);
+}

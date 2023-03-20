@@ -1,34 +1,15 @@
-import React, { useState } from 'react';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import { Route, Routes } from 'react-router-dom';
+import ArticlesBrowser from './ArticlesBrowser';
 
-import DXACarousel from './Carousel';
-import MainContent from './Content';
-
-function Main() {
-  const [key, setKey] = useState('global');
+function Main(key) {
 
   return (
-    <>
-    <DXACarousel/>
-    <Tabs
-      id="controlled-tab-example"
-      activeKey={key}
-      onSelect={(k) => setKey(k)}
-      className="mb-3 mt-5"
-      style={{ justifyContent: 'center' }}
-    >
-      <Tab eventKey="global" title="🌐Global">
-      </Tab>
-      <Tab eventKey="hot" title="🔥Hot">
-      </Tab>
-      <Tab eventKey="filter" title="🔎Filter">
-      </Tab>
-      <Tab eventKey="foryou" title="❤️ForYou" disabled>
-      </Tab>
-    </Tabs>
-    <MainContent k={key}/>
-    </>    
+    <Routes>
+      <Route path="/" element={<ArticlesBrowser tab={"global"}/>}/>
+      <Route path="/hot" element={<ArticlesBrowser tab={"hot"}/>}/>
+      <Route path="/filter" element={<ArticlesBrowser tab={"filter"}/>}/>
+      <Route path="/foryou" element={<ArticlesBrowser tab={"foryou"}/>}/>
+    </Routes>
   );
 }
 
