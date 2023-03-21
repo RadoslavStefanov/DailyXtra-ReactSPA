@@ -89,6 +89,20 @@
     border-top-left-radius: 0.5rem;
 }
 
+.loadMoreBtn{
+    display: block;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    border: none;
+    border-left: 3px dashed #4fbe1d;
+}
+
+.loadMoreBtn:hover{
+    background: #d2ffbe;
+    transition: ease;
+    transition-duration: 0.5s;
+}
+
 @media screen and (max-width: 768px) {
 .articleControlsItem {
     flex: none;

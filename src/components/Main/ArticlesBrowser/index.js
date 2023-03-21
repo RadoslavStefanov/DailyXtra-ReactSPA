@@ -9,6 +9,7 @@ import UserPanel from "../Floater/UserPanel";
 import style from './ArticlesBrowser.module.css';
 import DXACarousel from '../Carousel';
 import { Link } from 'react-router-dom';
+import { disableLoading, toggleLoading } from '../../../services/loadMoreBtnFuncs';
 
 
 export default function ArticlesBrowser(tab)
@@ -23,6 +24,19 @@ export default function ArticlesBrowser(tab)
 
         if(document.getElementById(tab.tab))
         {document.getElementById(tab.tab).classList.add("selected")}
+    }
+
+    function LoadMore()
+    {
+        debugger;
+        toggleLoading();
+        content.pageNumber = content.pageNumber+1;
+
+        getArticles(content)
+        .then(a=> setArticles([...articles, ...a]))
+        .catch(err =>{console.error(err)});
+
+        disableLoading();
     }
 
     const [content,] = 
@@ -88,6 +102,7 @@ export default function ArticlesBrowser(tab)
                                 ))}
                             </tbody>
                         </table>
+                        <button id="loadMoreBtn" className={style.loadMoreBtn} onClick={() => LoadMore()}>LOAD MORE...</button>
                     </Col>
                     <Col md={3} className="position-sticky">
                     <UserPanel/>

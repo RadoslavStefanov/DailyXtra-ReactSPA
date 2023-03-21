@@ -21,7 +21,7 @@ export const getArticles = async ({pageNumber, tabKey}) => {
     debugger;
     let key = getNewsKey();
     let criterias = stringifyCriterias();
-    let fetchUrl = `${searchConfig._baseUrl}${searchConfig._endPoint}?q=${criterias}&pageSize=10&page=1&apiKey=${key}`; 
+    let fetchUrl = `${searchConfig._baseUrl}${searchConfig._endPoint}?q=${criterias}&pageSize=10&page=${pageNumber}&apiKey=${key}`; 
 
     console.log(fetchUrl)
 
