@@ -51,6 +51,7 @@ export default function ArticlesBrowser(tab)
         if(content.tabKey!==tab.tab)
            {
              content.tabKey = tab.tab;
+             content.pageNumber = 1;
              setArticles([]);
            }
 
@@ -102,7 +103,9 @@ export default function ArticlesBrowser(tab)
                                 ))}
                             </tbody>
                         </table>
-                        <button id="loadMoreBtn" className={style.loadMoreBtn} onClick={() => LoadMore()}>LOAD MORE...</button>
+                        {tab.tab != "hot" && 
+                        <button id="loadMoreBtn" className={style.loadMoreBtn} onClick={() => LoadMore()}>LOAD MORE...</button>}
+                        
                     </Col>
                     <Col md={3} className="position-sticky">
                     <UserPanel/>
