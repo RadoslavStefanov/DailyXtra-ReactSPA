@@ -6,6 +6,7 @@
 /src/sysInfo*
 /src/sysInfo
 .pnp.js
+*firebase*
 
 # testing
 /coverage

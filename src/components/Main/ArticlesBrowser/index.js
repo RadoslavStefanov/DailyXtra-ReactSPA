@@ -10,12 +10,13 @@ import style from './ArticlesBrowser.module.css';
 import DXACarousel from '../Carousel';
 import { Link } from 'react-router-dom';
 import { disableLoading, toggleLoading } from '../../../services/loadMoreBtnFuncs';
+import Filter from '../Filter';
 
 
 export default function ArticlesBrowser(tab)
 {
 
-    console.log(tab.tab)
+    const tags = ['javascript', 'react', 'bootstrap'];
     const [articles, setArticles] = useState([]);
 
     function markSelectedTab()
@@ -77,25 +78,27 @@ export default function ArticlesBrowser(tab)
                     <PopularTopics/>
                 </Col>
                     <Col md={6} style={{minHeight:"720px"}}>
+                    {tab.tab === "filter" && <Filter/>}
+                    { articles !== undefined &&
                         <table className={style.contentTable}>
                             <tbody>
                                 {articles.map((article) => (
                                 <tr key={article.url} className={style.articleRow}>
                                     <td>
-                                        {article.urlToImage ? <div className={style.articleImage} style={{background:`url(${article.urlToImage})`}}></div>
+                                        {article.media ? <div className={style.articleImage} style={{background:`url(${article.media})`}}></div>
                                         : <div className={style.articleImage} style={{background:`url(https://thumbs.dreamstime.com/b/news-header-background-title-abstract-colorful-global-map-text-hightech-design-blue-colorful-template-90494676.jpg)`}}></div>}
                                         
                                         <div className="articleInfo">
                                             <a className={style.articleHeader} href={""+article.url} >{article.title}</a>
-                                            <p>🕒{calcTimeAgo(article.publishedAt)} | 👨‍🎨{article.author}</p>
-                                            <p className={style.articleDescription}>{article.description}</p>
+                                            <p>🕒{calcTimeAgo(article.published_date)} | 👨‍🎨{article.author}</p>
+                                            <p className={style.articleDescription}>{article.excerpt}</p>
                                         </div>
                                         <div style={{display:"block"}}>
                                             <div className={style.articleControls}>
-                                                <a href={""+article.url}className={style.articleControlsItem}>| 👁️View</a>
-                                                <div className={style.articleControlsItem}>| 📑Check original</div>
-                                                <div className={style.articleControlsItem}>| 💾Save</div>
-                                                <div className={style.articleControlsItem}>| 🧡Like</div>
+                                                <a href={""+article.link}className={style.articleControlsItem}>| 👁️View</a>
+                                                <a className={style.articleControlsItem}>| 📑Check original</a>
+                                                <a className={style.articleControlsItem}>| 💾Save</a>
+                                                <a className={style.articleControlsItem}>| 🧡Like</a>
                                             </div>
                                         </div>                                
                                     </td>
@@ -103,9 +106,11 @@ export default function ArticlesBrowser(tab)
                                 ))}
                             </tbody>
                         </table>
-                        {tab.tab != "hot" && 
-                        <button id="loadMoreBtn" className={style.loadMoreBtn} onClick={() => LoadMore()}>LOAD MORE...</button>}
-                        
+                    }
+                
+                    {tab.tab !== "hot" && 
+                    <button id="loadMoreBtn" className={style.loadMoreBtn} onClick={() => LoadMore()}>LOAD MORE...</button>}
+                    
                     </Col>
                     <Col md={3} className="position-sticky">
                     <UserPanel/>

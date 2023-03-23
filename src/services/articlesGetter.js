@@ -3,29 +3,38 @@ import { getNewsKey } from "../sysInfo/secrets";
 //Defaults
 let searchConfig =
 {
-    _baseUrl: "https://newsapi.org/v2/",
+    _baseUrl: "https://api.newscatcherapi.com/v2/",
     _pageNumber: 1,
     _tabKey: "",
-    _endPoint: "everything",
     _keyWord: ["everything"],
 }
+
+
 
 export const getArticles = async ({pageNumber, tabKey}) => {  
 
     if(tabKey==="global")
-        searchConfig._endPoint = "everything";
+        searchConfig._keyWord = ["global"];
     else if(tabKey==="hot")
-    searchConfig._endPoint = "top-headlines";
+        searchConfig._keyWord = ["hot"];
     
     console.log("tabKey= "+ tabKey)
-    debugger;
-    let key = getNewsKey();
+    //debugger;
+    //let key = getNewsKey();
     let criterias = stringifyCriterias();
-    let fetchUrl = `${searchConfig._baseUrl}${searchConfig._endPoint}?q=${criterias}&pageSize=10&page=${pageNumber}&apiKey=${key}`; 
+    let fetchUrl = `${searchConfig._baseUrl}search?q=${criterias}&page_size=10&page=${pageNumber}`; 
 
     console.log(fetchUrl)
 
-    let responce = await fetch(fetchUrl)
+    let responce = 
+    await fetch(fetchUrl, 
+    {
+        headers: 
+        {
+          'x-api-key': getNewsKey()
+        }
+    })
+    
     let result = await responce.json();
     return result.articles;
 }
