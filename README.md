@@ -5,7 +5,7 @@ Welcome to DailyXtra, an exam assignment project designed to provide users with 
 DailyXtra is a simple React application that fetches news articles using the NewsAPI and displays them to the user. The app is built using modern web technologies, including React, Bootstrap, and Firebase. The app features a simple and intuitive user interface, making it easy for users to browse the latest news articles.
 
 # Features
-- Fetches the latest news articles from NewsAPI
+- Fetches the latest news articles from [NewsAPI](https://newscatcherapi.com/)
 - Displays news articles to the user
 - Simple and intuitive user interface
 - Built using modern web technologies
