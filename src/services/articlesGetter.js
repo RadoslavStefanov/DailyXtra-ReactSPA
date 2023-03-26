@@ -1,4 +1,4 @@
-import { getNewsKey } from "../sysInfo/secrets";
+import { getMockData, getNewsKey } from "../sysInfo/secrets";
 
 //Defaults
 let searchConfig =
@@ -22,9 +22,7 @@ export const getArticles = async ({pageNumber, tabKey}) => {
     let criterias = stringifyCriterias();
     let fetchUrl = `${searchConfig._baseUrl}search?q=${criterias}&page_size=10&page=${pageNumber}`; 
 
-    console.log(fetchUrl)
-
-    let responce = 
+    /*let responce = 
     await fetch(fetchUrl, 
     {
         headers: 
@@ -34,7 +32,9 @@ export const getArticles = async ({pageNumber, tabKey}) => {
     })
     
     let result = await responce.json();
-    return result.articles;
+    return result.articles;*/
+    let string = getMockData();
+    return JSON.parse(string).articles;
 }
 
 export const getFilteredArticles = async ({pageNumber, tabKey}, filterObj) => {  
@@ -54,7 +54,9 @@ export const getFilteredArticles = async ({pageNumber, tabKey}, filterObj) => {
     })
     
     let result = await responce.json();
-    return result.articles;
+    //return result.articles;
+    let string = getMockData();
+    return JSON.parse(string).articles;
 }
 
 function generatePathFromFilter({filterObj},pageNumber)

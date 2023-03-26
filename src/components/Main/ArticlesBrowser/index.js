@@ -111,14 +111,14 @@ export default function ArticlesBrowser({tab})
                                         : <div className={style.articleImage} style={{background:`url(https://thumbs.dreamstime.com/b/news-header-background-title-abstract-colorful-global-map-text-hightech-design-blue-colorful-template-90494676.jpg)`}}></div>}
                                         
                                         <div className="articleInfo">
-                                            <a className={style.articleHeader} href={""+article.url} >{article.title}</a>
+                                            <Link className={style.articleHeader} to={`../article/${article._id}`} >{article.title}</Link>
                                             <p>🕒{calcTimeAgo(article.published_date)} | 👨‍🎨{article.author}</p>
                                             <p className={style.articleDescription}>{article.excerpt}</p>
                                         </div>
                                         <div style={{display:"block"}}>
                                             <div className={style.articleControls}>
-                                                <a href={""+article.link}className={style.articleControlsItem}>| 👁️View</a>
-                                                <a className={style.articleControlsItem}>| 📑Check original</a>
+                                                <Link to={`../article/${article._id}`} className={style.articleControlsItem}>| 👁️View</Link>
+                                                <a href={""+article.link} className={style.articleControlsItem}>| 📑Check original</a>
                                                 <a className={style.articleControlsItem}>| 💾Save</a>
                                                 <a className={style.articleControlsItem}>| 🧡Like</a>
                                             </div>
