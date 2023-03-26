@@ -11,7 +11,7 @@ export default function Footer() {
 
         <div>
           <a href='' className='me-4 text-reset'>
-            <MDBIcon color='secondary' fab icon='facebook-f' />
+            <MDBIcon color='secondary' fab icon='twitter' />
           </a>
           <a href='' className='me-4 text-reset'>
             <MDBIcon color='secondary' fab icon='twitter' />
@@ -36,12 +36,10 @@ export default function Footer() {
           <MDBRow className='mt-3'>
             <MDBCol md='3' lg='4' xl='3' className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>
-                <MDBIcon color='secondary' icon='gem' className='me-3' />
-                Company name
+                DailyXtra
               </h6>
               <p>
-                Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit
-                amet, consectetur adipisicing elit.
+                DailyXtra is a cutting-edge web app that provides users with up-to-date news from over 80,000 different news sites. Founded in late 2019, our company is committed to delivering the latest information on a wide range of topics, from business and politics to technology and entertainment.
               </p>
             </MDBCol>
 

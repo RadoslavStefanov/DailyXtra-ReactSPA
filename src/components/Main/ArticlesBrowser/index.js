@@ -65,24 +65,22 @@ export default function ArticlesBrowser({tab})
     useEffect(() => 
     {   
         if(content.tabKey!==tab)
-           {
-             content.tabKey = tab;
-             content.pageNumber = 1;
-             setArticles([]);
-           }
+        {
+            content.tabKey = tab;
+            content.pageNumber = 1;
+            setArticles([]);
+        }
+
+        markSelectedTab();
 
         if(tab !== "filter")
             getArticles(content)
             .then(a=> setArticles(a))
-            .then( () => markSelectedTab() )
             .catch(err =>{console.error(err)});
         else if(filterResult.isApplied)
             getFilteredArticles(content,filterResult)
             .then(a=> setArticles(a))
-            .then( () => markSelectedTab() )
             .catch(err =>{console.error(err)});
-        else
-            markSelectedTab()
 
     },[tab,filterResult])
 
