@@ -21,7 +21,8 @@ export default function ArticlesBrowser({tab})
             keywords: null,
             country: '',
             language: null,
-            sortOrder: ''
+            sortOrder: '',
+            isApplied: false
         });
 
     function markSelectedTab()
@@ -50,6 +51,7 @@ export default function ArticlesBrowser({tab})
     }
 
     function getFilterConfig(filterObj) {
+        filterObj.isApplied = true;
         setFilter(filterObj);
     }
 
@@ -74,7 +76,7 @@ export default function ArticlesBrowser({tab})
             .then(a=> setArticles(a))
             .then( () => markSelectedTab() )
             .catch(err =>{console.error(err)});
-        else
+        else if(filterResult.isApplied)
             getFilteredArticles(content,filterResult)
             .then(a=> setArticles(a))
             .then( () => markSelectedTab() )

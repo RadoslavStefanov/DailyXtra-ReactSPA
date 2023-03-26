@@ -64,7 +64,8 @@ function generatePathFromFilter({filterObj},pageNumber)
         countries: null,
         lang: null,
         sort_by: null,
-        page: 1
+        page: 1,
+        page_size: 10
     }
 
     debugger;
