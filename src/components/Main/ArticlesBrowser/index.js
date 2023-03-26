@@ -81,6 +81,9 @@ export default function ArticlesBrowser({tab})
             .then(a=> setArticles(a))
             .then( () => markSelectedTab() )
             .catch(err =>{console.error(err)});
+        else
+            markSelectedTab()
+
     },[tab,filterResult])
 
     return(
@@ -130,6 +133,9 @@ export default function ArticlesBrowser({tab})
                     }
                 
                     {tab !== "hot" && tab !== "filter" && 
+                    <button id="loadMoreBtn" className={style.loadMoreBtn} onClick={() => LoadMore()}>LOAD MORE...</button>}
+
+                    {tab === "filter" && filterResult.isApplied &&
                     <button id="loadMoreBtn" className={style.loadMoreBtn} onClick={() => LoadMore()}>LOAD MORE...</button>}
                     
                     </Col>

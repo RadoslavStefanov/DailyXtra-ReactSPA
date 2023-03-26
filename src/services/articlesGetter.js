@@ -68,8 +68,6 @@ function generatePathFromFilter({filterObj},pageNumber)
         page_size: 10
     }
 
-    debugger;
-
     if(filterObj.keywords && filterObj.keywords.length > 0)
     {searchObj.q = filterObj.keywords.slice(0, 5).map(obj => obj.value).join(',');}
 
