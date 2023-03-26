@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Container, Row, Col } from "react-bootstrap";
-import { getArticles } from '../../../services/articlesGetter';
+import { getArticles, getFilteredArticles } from '../../../services/articlesGetter';
 import calcTimeAgo from '../../../services/timeCalculator';
 import PopularTopics from "../Floater/PopularTopics";
 import UserPanel from "../Floater/UserPanel";
@@ -13,54 +13,73 @@ import { disableLoading, toggleLoading } from '../../../services/loadMoreBtnFunc
 import Filter from '../Filter';
 
 
-export default function ArticlesBrowser(tab)
+export default function ArticlesBrowser({tab})
 {
-
-    const tags = ['javascript', 'react', 'bootstrap'];
     const [articles, setArticles] = useState([]);
+    const [filterResult, setFilter] = useState(
+        {
+            keywords: null,
+            country: '',
+            language: null,
+            sortOrder: ''
+        });
 
     function markSelectedTab()
     {
         document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
 
-        if(document.getElementById(tab.tab))
-        {document.getElementById(tab.tab).classList.add("selected")}
+        if(document.getElementById(tab))
+        {document.getElementById(tab).classList.add("selected")}
     }
 
     function LoadMore()
     {
-        debugger;
         toggleLoading();
         content.pageNumber = content.pageNumber+1;
 
-        getArticles(content)
-        .then(a=> setArticles([...articles, ...a]))
-        .catch(err =>{console.error(err)});
+        if(tab !== "filter")
+            getArticles(content)
+            .then(a=> setArticles([...articles, ...a]))
+            .catch(err => { console.error(err);  content.pageNumber = content.pageNumber-1; });
+        else
+            getFilteredArticles(content)
+            .then(a=> setArticles([...articles, ...a]))
+            .catch(err => { console.error(err);  content.pageNumber = content.pageNumber-1; });
 
         disableLoading();
+    }
+
+    function getFilterConfig(filterObj) {
+        setFilter(filterObj);
     }
 
     const [content,] = 
     useState(
         {
             pageNumber:1,
-            tabKey: tab.tab
+            tabKey: tab
         });
 
     useEffect(() => 
     {   
-        if(content.tabKey!==tab.tab)
+        if(content.tabKey!==tab)
            {
-             content.tabKey = tab.tab;
+             content.tabKey = tab;
              content.pageNumber = 1;
              setArticles([]);
            }
 
-        getArticles(content)
-        .then(a=> setArticles(a))
-        .then( () => markSelectedTab() )
-        .catch(err =>{console.error(err)});
-    },[tab.tab])
+        if(tab !== "filter")
+            getArticles(content)
+            .then(a=> setArticles(a))
+            .then( () => markSelectedTab() )
+            .catch(err =>{console.error(err)});
+        else
+            getFilteredArticles(content,filterResult)
+            .then(a=> setArticles(a))
+            .then( () => markSelectedTab() )
+            .catch(err =>{console.error(err)});
+    },[tab,filterResult])
 
     return(
         <>
@@ -68,7 +87,7 @@ export default function ArticlesBrowser(tab)
             <ul className={style.browserTabs}>
                 <Link to="/" id="global">🌐Global</Link>
                 <Link to="/hot" id="hot">🔥Hot</Link>
-                <Link to="/filter" id="filter">🔎Filter</Link>
+                <Link to="/filter" id="filter">🔎Search</Link>
                 <Link to="/foryou" id="foryou" disabled={true} >❤️ForYou</Link>
             </ul>
             
@@ -78,7 +97,7 @@ export default function ArticlesBrowser(tab)
                     <PopularTopics/>
                 </Col>
                     <Col md={6} style={{minHeight:"720px"}}>
-                    {tab.tab === "filter" && <Filter/>}
+                    {tab === "filter" && <Filter getFilterConfig={getFilterConfig}/>}
                     { articles !== undefined &&
                         <table className={style.contentTable}>
                             <tbody>
@@ -108,7 +127,7 @@ export default function ArticlesBrowser(tab)
                         </table>
                     }
                 
-                    {tab.tab !== "hot" && 
+                    {tab !== "hot" && tab !== "filter" && 
                     <button id="loadMoreBtn" className={style.loadMoreBtn} onClick={() => LoadMore()}>LOAD MORE...</button>}
                     
                     </Col>

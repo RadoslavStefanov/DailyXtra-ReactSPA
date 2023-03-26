@@ -20,6 +20,14 @@
     text-align: right;
 }
 
+
+.dxa-delimiter{
+    display: block;
+    height: 5px;
+    width: 100%;
+    background-color: #4fbe1d;
+}
+
 .floaterRight .userImgSmall{
     background-size: cover!important;
     display: inline-block;
