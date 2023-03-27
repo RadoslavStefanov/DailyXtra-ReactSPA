@@ -39,7 +39,7 @@ export const getArticles = async ({pageNumber, tabKey}) => {
 
 export const getFilteredArticles = async ({pageNumber, tabKey}, filterObj) => {  
 
-    let pathSuffix = generatePathFromFilter({filterObj},pageNumber)    
+    /*let pathSuffix = generatePathFromFilter({filterObj},pageNumber)    
     let fetchUrl = `${searchConfig._baseUrl}search${pathSuffix}`; 
 
     //console.log(fetchUrl)
@@ -54,7 +54,7 @@ export const getFilteredArticles = async ({pageNumber, tabKey}, filterObj) => {
     })
     
     let result = await responce.json();
-    //return result.articles;
+    //return result.articles;*/
     let string = getMockData();
     return JSON.parse(string).articles;
 }

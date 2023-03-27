@@ -38,14 +38,18 @@ export default function ArticlesBrowser({tab})
         toggleLoading();
         content.pageNumber = content.pageNumber+1;
 
-        if(tab !== "filter")
-            getArticles(content)
-            .then(a=> setArticles([...articles, ...a]))
-            .catch(err => { console.error(err);  content.pageNumber = content.pageNumber-1; });
-        else
+        if(tab === "filter")
+        {
             getFilteredArticles(content)
             .then(a=> setArticles([...articles, ...a]))
             .catch(err => { console.error(err);  content.pageNumber = content.pageNumber-1; });
+        }    
+        else
+        {
+            getArticles(content)
+            .then(a=> setArticles([...articles, ...a]))
+            .catch(err => { console.error(err);  content.pageNumber = content.pageNumber-1; });
+        }           
 
         disableLoading();
     }
