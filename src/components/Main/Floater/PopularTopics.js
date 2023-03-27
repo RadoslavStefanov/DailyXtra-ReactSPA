@@ -14,7 +14,7 @@ export default function PopularTopics()
 
     return(
         <div className="py-3 floaterLeft">
-          <img src="images/nav-logo.png" style={{ width:"40%" }}></img>
+          <img src="/images/nav-logo.png" style={{ width:"40%" }}></img>
           <h3>Popular Topics</h3>
             <ul className="list-unstyled dxa-popular">
               <div>
