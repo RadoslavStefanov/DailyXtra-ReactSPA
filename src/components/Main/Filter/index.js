@@ -20,19 +20,13 @@ function Filter({getFilterConfig}) {
 
     const animatedComponents = makeAnimated();
     const languageOptions = [
-        { value: 'en', label: 'English' },
-        { value: 'bg', label: 'Bulgarian' }
-    ]
-    const countriesOptions = [
-        { value: 'global', label: 'Global' },
-        { value: 'usa', label: 'USA' },
-        { value: 'uk', label: 'England' },
-        { value: 'bg', label: 'Bulgaria' }
+        { value: 'eng', label: 'English' },
+        { value: 'bul', label: 'Bulgarian' }
     ]
     const sortOptions = [
-        { value: 'relevancy', label: 'Relevancy' },
+        { value: 'rel', label: 'Relevancy' },
         { value: 'date', label: 'Date' },
-        { value: 'rank', label: 'Rank' }
+        { value: 'socialScore', label: 'Rank' }
     ]
 
     const renderTooltip = (props) => (
@@ -64,20 +58,6 @@ function Filter({getFilterConfig}) {
                     <MultiCreatable name="keywords" filterFormChangeHandler={filterFormChangeHandler}/>
                     <Form.Text className="text-muted">
                         Keep in mind only the first 5 keywords will be used!
-                    </Form.Text>
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    <Form.Label>Country</Form.Label>
-                    <Select
-                        closeMenuOnSelect={true}
-                        components={animatedComponents}
-                        options={countriesOptions}
-                        name="country"
-                        onChange = {(event) => filterFormChangeHandler(event, 'country')}
-                    />
-                    <Form.Text className="text-muted">
-                        Keep empty for all countries.
                     </Form.Text>
                 </Form.Group>
 

@@ -109,20 +109,21 @@ export default function ArticlesBrowser({tab})
                         <table className={style.contentTable}>
                             <tbody>
                                 {articles.map((article) => (
-                                <tr key={article.url} className={style.articleRow}>
+                                <tr key={article.uri} className={style.articleRow}>
                                     <td>
-                                        {article.media ? <div className={style.articleImage} style={{background:`url(${article.media})`}}></div>
-                                        : <div className={style.articleImage} style={{background:`url(https://thumbs.dreamstime.com/b/news-header-background-title-abstract-colorful-global-map-text-hightech-design-blue-colorful-template-90494676.jpg)`}}></div>}
+                                        {article.image ? <div className={style.articleImage} style={{background:`url(${article.image})`}}></div>
+                                        : <div className={style.articleImage} style={{background:`url(https://sdgs.un.org/themes/custom/porto/assets/default-news350x170.png)`}}></div>}
                                         
                                         <div className="articleInfo">
-                                            <Link className={style.articleHeader} to={`../article/${article._id}`} >{article.title}</Link>
-                                            <p>🕒{calcTimeAgo(article.published_date)} | 👨‍🎨{article.author}</p>
-                                            <p className={style.articleDescription}>{article.excerpt}</p>
+                                            <Link className={style.articleHeader} to={`../article/${article.uri}`} >{article.title}</Link>
+                                            <p>🕒{calcTimeAgo(article.dateTimePub)} {article.authors[0] &&  `| 👨‍🎨${article.authors[0].name}`}                                            
+                                            </p>
+                                            <p className={style.articleDescription}>{article.body.substring(0,100)+" ..."}</p>
                                         </div>
                                         <div style={{display:"block"}}>
                                             <div className={style.articleControls}>
-                                                <Link to={`../article/${article._id}`} className={style.articleControlsItem}>| 👁️View</Link>
-                                                <a href={""+article.link} className={style.articleControlsItem}>| 📑Check original</a>
+                                                <Link to={`../article/${article.uri}`} className={style.articleControlsItem}>| 👁️View</Link>
+                                                <a href={""+article.url} className={style.articleControlsItem}>| 📑Check original</a>
                                                 <a className={style.articleControlsItem}>| 💾Save</a>
                                                 <a className={style.articleControlsItem}>| 🧡Like</a>
                                             </div>
