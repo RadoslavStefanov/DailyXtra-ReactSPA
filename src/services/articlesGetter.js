@@ -1,4 +1,5 @@
 import { getMockData, getNewsKey } from "../sysInfo/secrets";
+import urlHasImage from "./urlHasImage";
 
 //Defaults
 let searchConfig =
@@ -30,8 +31,7 @@ export const getArticles = async ({pageNumber, tabKey}) => {
     return JSON.parse(string).articles;*/
 }
 
-export const getFilteredArticles = async ({pageNumber, tabKey}, filterObj) => {  
-    
+export const getFilteredArticles = async ({pageNumber, tabKey}, filterObj) => {
     let pathSuffix = generatePathFromFilter({filterObj},pageNumber)    
     let fetchUrl = `${searchConfig._baseUrl}${pathSuffix}&apiKey=${getNewsKey()}`; 
 
@@ -41,6 +41,19 @@ export const getFilteredArticles = async ({pageNumber, tabKey}, filterObj) => {
     return result.articles.results;
     /*let string = getMockData();
     return JSON.parse(string).articles;*/
+}
+
+export const getArticleById = async (articleId) => {  
+    let fetchUrl = `${searchConfig._baseUrl}?articleUri=${articleId}&apiKey=${getNewsKey()}`; 
+
+    let responce = await fetch(fetchUrl)    
+    let result = await responce.json();
+
+    let article = result.articles.results[0]
+    if(!urlHasImage(article.image))
+    {article.image = "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX26402161.jpg"}
+
+    return result.articles.results[0];
 }
 
 function generatePathFromFilter({filterObj},pageNumber)

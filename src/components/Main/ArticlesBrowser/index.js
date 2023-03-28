@@ -7,7 +7,6 @@ import PopularTopics from "../Floater/PopularTopics";
 import UserPanel from "../Floater/UserPanel";
 
 import style from './ArticlesBrowser.module.css';
-import DXACarousel from '../Carousel';
 import { Link } from 'react-router-dom';
 import { disableLoading, toggleLoading } from '../../../services/loadMoreBtnFuncs';
 import Filter from '../Filter';
@@ -89,15 +88,7 @@ export default function ArticlesBrowser({tab})
     },[tab,filterResult])
 
     return(
-        <>
-            <DXACarousel/>
-            <ul className={style.browserTabs}>
-                <Link to="/" id="global">🌐Global</Link>
-                <Link to="/hot" id="hot">🔥Hot</Link>
-                <Link to="/filter" id="filter">🔎Search</Link>
-                <Link to="/foryou" id="foryou" disabled={true} >❤️ForYou</Link>
-            </ul>
-            
+        <>            
             <Container fluid className='px-5'>
                 <Row>
                 <Col md={3} className="border-right">
@@ -115,14 +106,14 @@ export default function ArticlesBrowser({tab})
                                         : <div className={style.articleImage} style={{background:`url(https://sdgs.un.org/themes/custom/porto/assets/default-news350x170.png)`}}></div>}
                                         
                                         <div className="articleInfo">
-                                            <Link className={style.articleHeader} to={`../article/${article.uri}`} >{article.title}</Link>
+                                            <Link className={style.articleHeader} to={`/article/${article.uri}`} >{article.title}</Link>
                                             <p>🕒{calcTimeAgo(article.dateTimePub)} {article.authors[0] &&  `| 👨‍🎨${article.authors[0].name}`}                                            
                                             </p>
                                             <p className={style.articleDescription}>{article.body.substring(0,100)+" ..."}</p>
                                         </div>
                                         <div style={{display:"block"}}>
                                             <div className={style.articleControls}>
-                                                <Link to={`../article/${article.uri}`} className={style.articleControlsItem}>| 👁️View</Link>
+                                                <Link to={`/article/${article.uri}`} className={style.articleControlsItem}>| 👁️View</Link>
                                                 <a href={""+article.url} className={style.articleControlsItem}>| 📑Check original</a>
                                                 <a className={style.articleControlsItem}>| 💾Save</a>
                                                 <a className={style.articleControlsItem}>| 🧡Like</a>
@@ -135,10 +126,10 @@ export default function ArticlesBrowser({tab})
                         </table>
                     }
                 
-                    {tab !== "hot" && tab !== "filter" && 
+                    {tab !== "hot" && tab !== "filter" && articles.length > 0&& 
                     <button id="loadMoreBtn" className={style.loadMoreBtn} onClick={() => LoadMore()}>LOAD MORE...</button>}
 
-                    {tab === "filter" && filterResult.isApplied &&
+                    {tab === "filter" && articles.length > 0 && filterResult.isApplied &&
                     <button id="loadMoreBtn" className={style.loadMoreBtn} onClick={() => LoadMore()}>LOAD MORE...</button>}
                     
                     </Col>

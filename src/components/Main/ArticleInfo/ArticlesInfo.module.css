@@ -12,3 +12,47 @@
     border-top-right-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
 }
+
+.backButton{
+    float: left;
+    border: none;
+    clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+    background-color: #4fbe1d;
+    color: #3a3d40;
+    padding: 0.5rem 1.5rem;
+    padding-right: 2rem;
+    font-weight: 700;
+    transition-duration: 0.3s;
+}
+
+.backButton:hover{
+    scale: 105%;
+    clip-path: polygon(100% 0%, 100% 48%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+}
+
+.articleInfoHeader{
+    text-align: center;
+    margin-bottom: 1rem;
+    border-bottom: 2px dashed gray;
+}
+
+.articleImage{
+    width: 50%;
+    float: left;
+    margin: 0 1rem 1rem 0;
+    border-bottom: 6px solid #4fbe1d;;
+}
+
+.articleBody, .articleBody p:first-child{
+    display: inline;
+    text-align: justify;
+    padding-right: 0.5rem;
+}
+
+.articleBody div:first-child{
+    margin-bottom: 1rem;
+}
+
+.articleBody p:nth-child(2){
+    font-weight: 400;
+}
