@@ -7,6 +7,9 @@ import { MDBCheckbox } from 'mdb-react-ui-kit';
 import style from './Login.module.css';
 
 function Login() {
+
+  document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
+
   return (
     <Col md={6} style={{minHeight:"720px"}}>
     {

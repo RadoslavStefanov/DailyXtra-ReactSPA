@@ -3,6 +3,8 @@ import style from './AboutUs.module.css';
 import { Col } from "react-bootstrap";
 
 function Subscribe() {
+  document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
+  
   return (
     <Col md={6} style={{minHeight:"720px"}}>
     {

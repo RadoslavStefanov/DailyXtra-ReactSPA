@@ -7,6 +7,8 @@ import { MDBCheckbox } from 'mdb-react-ui-kit';
 import style from './Register.module.css';
 
 function Register() {
+  document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
+  
   return (
     <Col md={6} style={{minHeight:"720px"}}>
     {

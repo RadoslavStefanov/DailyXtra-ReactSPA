@@ -7,9 +7,30 @@
     color: rgb(68, 68, 68);
     font-weight: 600;
     border-radius: 1rem;
+    text-decoration: none;
+    padding: 0.3rem;
 }
 
-.dxaNavLink:hover{
+.accentNavBtn:hover{
+    color: rgb(68, 68, 68);
+    scale:105%
+}
+
+.vertFix{
+    padding:  0.3rem 0.3rem 0.3rem 0;
+    margin: 0 0.5rem;
+    color: gray;
+    text-decoration: none;
+}
+
+.dxaNavLink{
+    margin: 0 0.5rem;
+    color: gray;
+    text-decoration: none;
+}
+
+.dxaNavLink:hover, .vertFix:hover{
+    color: gray;
     border-bottom: 1px solid #4fbe1d;
     font-weight: 400;
     transition: ease-in-out;

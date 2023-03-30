@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { NavLink } from "react-router-dom";
 
 import styles from './Navigation.module.css';
 
@@ -12,14 +13,12 @@ function Navigation() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features" className={styles.dxaNavLink}>About</Nav.Link>
-            <Nav.Link href="#pricing" className={styles.dxaNavLink}>Subscribe</Nav.Link>
+            <NavLink to="aboutus" className={styles.dxaNavLink}>About Us</NavLink>
+            <NavLink to="subscribe" className={styles.dxaNavLink}>Subscribe</NavLink>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Profile</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes" className={styles.accentNavBtn}>
-              For You
-            </Nav.Link>
+            <NavLink to="myprofile" className={styles.vertFix}>Profile</NavLink>
+            <NavLink to="foryou" className={styles.accentNavBtn}>For YOU</NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>
