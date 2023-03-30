@@ -5,13 +5,15 @@ import { getArticles, getFilteredArticles } from '../../../services/articlesGett
 import calcTimeAgo from '../../../services/timeCalculator';
 
 import style from './ArticlesBrowser.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { disableLoading, toggleLoading } from '../../../services/loadMoreBtnFuncs';
 import Filter from '../Filter';
+import { isUserLogged, preventNotLogged } from '../../../services/usersService';
 
 
 export default function ArticlesBrowser({tab})
 {
+    const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
     const [filterResult, setFilter] = useState(
         {
@@ -65,6 +67,8 @@ export default function ArticlesBrowser({tab})
 
     useEffect(() => 
     {   
+        preventNotLogged(tab, navigate);
+
         if(content.tabKey!==tab)
         {
             content.tabKey = tab;
@@ -108,8 +112,18 @@ export default function ArticlesBrowser({tab})
                                     <div className={style.articleControls}>
                                         <Link to={`/article/${article.uri}`} className={style.articleControlsItem}>| 👁️View</Link>
                                         <a href={""+article.url} className={style.articleControlsItem}>| 📑Check original</a>
-                                        <a className={style.articleControlsItem}>| 💾Save</a>
-                                        <a className={style.articleControlsItem}>| 🧡Like</a>
+                                        {isUserLogged() ? 
+                                            <>
+                                                <a className={style.articleControlsItem}>| 💾Save</a>
+                                                <a className={style.articleControlsItem}>| 🧡Like</a>
+                                            </>                                            
+                                            :
+                                            <>
+                                                <a className={style.articleDisabledControlsItem}>| 💾Save</a>
+                                                <a className={style.articleDisabledControlsItem}>| 🧡Like</a>
+                                            </>
+                                        }
+                                        
                                     </div>
                                 </div>                                
                             </td>

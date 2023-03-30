@@ -68,6 +68,17 @@
     color: #3a3d40;
 }
 
+.articleDisabledControlsItem{
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #3a3d40;
+    filter: grayscale(1);
+    background: #f0f0f0;
+    pointer-events: none;
+}
+
 .articleControlsItem:hover{
     background-color: #4fbe1d;
     cursor: pointer;

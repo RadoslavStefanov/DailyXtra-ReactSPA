@@ -11,6 +11,7 @@ import AboutUs from '../GenericPages/AboutUs';
 import Subscribe from '../GenericPages/Subscription';
 
 import style from './Main.module.css';
+import { isUserLogged } from '../../services/usersService';
 
 function Main(key) {
 
@@ -20,8 +21,18 @@ function Main(key) {
       <ul className={style.browserTabs}>
           <Link to="/" id="global">🌐Global</Link>
           <Link to="/hot" id="hot">🔥Hot</Link>
-          <Link to="/filter" id="filter">🔎Search</Link>
-          <Link to="/foryou" id="foryou" disabled={true} >❤️ForYou</Link>
+          {isUserLogged() ? 
+              <>
+                  <Link to="/filter" id="filter">🔎Search</Link>
+                  <Link to="/foryou" id="foryou" disabled={true} >❤️ForYou</Link>
+              </>                                            
+              :
+              <>
+                  <Link to="/login" id="filter" className={style.disabledTabs}>🔎Search</Link>
+                  <Link to="/login" id="foryou"  className={style.disabledTabs}>❤️ForYou</Link>
+              </>
+          }
+          
       </ul>
       <Container fluid className='px-5'>
         <Row>

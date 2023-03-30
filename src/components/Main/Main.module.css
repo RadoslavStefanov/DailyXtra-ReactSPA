@@ -12,3 +12,9 @@
     border-top-right-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
 }
+
+.disabledTabs{
+    filter: grayscale(1);
+    background: #f0f0f0;
+    pointer-events: none;
+}

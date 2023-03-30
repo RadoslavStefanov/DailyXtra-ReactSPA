@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from "react-router-dom";
+import { isUserLogged } from '../../../services/usersService';
 
 import styles from './Navigation.module.css';
 
@@ -16,10 +17,17 @@ function Navigation() {
             <NavLink to="aboutus" className={styles.dxaNavLink}>About Us</NavLink>
             <NavLink to="subscribe" className={styles.dxaNavLink}>Subscribe</NavLink>
           </Nav>
-          <Nav>
-            <NavLink to="myprofile" className={styles.vertFix}>Profile</NavLink>
-            <NavLink to="foryou" className={styles.accentNavBtn}>For YOU</NavLink>
-          </Nav>
+          {isUserLogged() ? 
+              <Nav>
+                <NavLink to="myprofile" className={styles.vertFix}>Profile</NavLink>
+                <NavLink to="foryou" className={styles.accentNavBtn}>For YOU</NavLink>
+              </Nav>                                           
+              :
+              <Nav>
+                <NavLink to="register" className={styles.vertFix}>Register</NavLink>
+                <NavLink to="login" className={styles.accentNavBtn}>Log in</NavLink>
+              </Nav> 
+          }
         </Navbar.Collapse>
       </Container>
     </Navbar>
