@@ -5,6 +5,8 @@ const token = window.sessionStorage.getItem("token");
 
 window.sessionStorage.removeItem("token");*/
 
+import { toast } from "react-toastify";
+
 
 export async function setSessionToken(input)
 {
@@ -32,6 +34,8 @@ export function isUserLogged()
 export function preventNotLogged(tab, hook)
 {
     if(tab==="foryou" || tab==="filter" && !isUserLogged())
+    {
         hook('/login');
-        
+        toast.error("You need to be logged in to open this page!")
+    }        
 }

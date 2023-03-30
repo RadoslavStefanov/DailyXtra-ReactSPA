@@ -2,6 +2,7 @@ import React from "react";
 import Navigation from "./components/Shared/Navigation";
 import Footer from "./components/Shared/Footer";
 import Main from "./components/Main";
+import Toastr from "./components/Shared/Toastr";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Navigation/>
       <Main/>
       <Footer/>
+      <Toastr/>
     </>    
   );
 }
