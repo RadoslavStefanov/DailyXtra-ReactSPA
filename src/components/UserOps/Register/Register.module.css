@@ -1,0 +1,15 @@
+.headImg{
+    width: 50%; 
+    margin: 0 auto; 
+    display: block;
+}
+
+.loginFormContainer{
+    max-width: 700px;
+    display: block;
+    margin: 0 auto;
+}
+
+.loginForm button{
+    background-color: #4fbe1d;
+}

@@ -1,0 +1,19 @@
+.headImg{
+    width: 50%; 
+    margin: 0 auto; 
+    display: block;
+}
+
+.aboutUsDesc
+{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutUsDesc p strong
+{
+    color: #4fbe1d;
+    text-decoration: underline;
+    filter: drop-shadow(0.5px 1px 0.5px #3e3e3e);
+}

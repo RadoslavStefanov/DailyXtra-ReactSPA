@@ -6,6 +6,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import UserPanel from "../Shared/Floater/UserPanel";
 import PopularTopics from "../Shared/Floater/PopularTopics";
 import Login from "../UserOps/Login";
+import Register from "../UserOps/Register";
+import AboutUs from '../GenericPages/AboutUs';
+import Subscribe from '../GenericPages/Subscription';
 
 import style from './Main.module.css';
 
@@ -31,6 +34,9 @@ function Main(key) {
                 <Route path="/filter" element={<ArticlesBrowser tab={"filter"}/>}/>
                 <Route path="/foryou" element={<ArticlesBrowser tab={"foryou"}/>}/>
                 <Route path="/login" element={<Login/>}/>
+                <Route path="/register" element={<Register/>}/>
+                <Route path="/aboutus" element={<AboutUs/>}/>
+                <Route path="/subscribe" element={<Subscribe/>}/>
                 <Route path="/article/:id" element={<ArticlesInfo/>}/>
           </Routes>
           <Col md={3} className="position-sticky">
