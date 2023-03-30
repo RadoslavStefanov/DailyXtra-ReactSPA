@@ -95,8 +95,8 @@ export default function ArticlesBrowser({tab})
                         {articles.map((article) => (
                         <tr key={article.uri} className={style.articleRow}>
                             <td>
-                                {article.image ? <div className={style.articleImage} style={{background:`url(${article.image})`}}></div>
-                                : <div className={style.articleImage} style={{background:`url(https://sdgs.un.org/themes/custom/porto/assets/default-news350x170.png)`}}></div>}
+                                {article.image ? <div className={style.articleImage} style={{background:`url(${article.image}) no-repeat center`}}></div>
+                                : <div className={style.articleImage} style={{background:`url(https://sdgs.un.org/themes/custom/porto/assets/default-news350x170.png) no-repeat center`}}></div>}
                                 
                                 <div className="articleInfo">
                                     <Link className={style.articleHeader} to={`/article/${article.uri}`} >{article.title}</Link>
