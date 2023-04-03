@@ -36,8 +36,6 @@ function Filter({getFilterConfig}) {
     );
 
     const filterFormChangeHandler = (e, propName) => {
-        console.log(e)
-
         if(propName === "language" || propName === "keywords")
             setFilter( state => ({...state, [propName]: e}))
         else

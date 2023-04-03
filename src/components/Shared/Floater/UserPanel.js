@@ -1,7 +1,25 @@
-import { isUserLogged } from "../../../services/usersService";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Contexts/AuthContext";
+import { getUserInfo } from "../../../services/usersService";
 
 export default function UserPanel()
 {
+    const { isUserLogged, dxaUser } = useContext(AuthContext);
+    const [userDetails, setUserDetails] = useState({});
+
+    useEffect(() => 
+    {   
+        getUserInfo(dxaUser)
+        .then(res => 
+            {
+                if(res)
+                {
+                    console.log(res);
+                    setUserDetails(res);
+                }
+            })
+    },[isUserLogged])
+
     return(
         <>
             {isUserLogged() ? 
@@ -9,8 +27,8 @@ export default function UserPanel()
                     <div className="py-3 floaterRight">
                         
                         <div className="dxa-underlined">
-                            <strong>Radoslav99</strong>
-                            <div className="userImgSmall" style={{background:"url(https://www.youredm.com/wp-content/uploads/2021/01/Flux-Pavilion-Press-Shot-1-2020-Fiona-Garden-1-750x500.jpg) center no-repeat"}}></div>
+                            <strong>{userDetails.username}</strong>
+                            <div className="userImgSmall" style={{background:`url(${userDetails.profile_picture}) center no-repeat`}}></div>
                         </div>
                         <ul className="list-unstyled">
                             <li>Profile 👤</li>

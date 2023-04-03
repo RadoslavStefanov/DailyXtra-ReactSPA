@@ -5,8 +5,12 @@ import { NavLink } from "react-router-dom";
 import { isUserLogged } from '../../../services/usersService';
 
 import styles from './Navigation.module.css';
+import { useContext } from 'react';
+import { AuthContext } from '../../Contexts/AuthContext';
 
 function Navigation() {
+  const { isUserLogged } = useContext(AuthContext);
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>

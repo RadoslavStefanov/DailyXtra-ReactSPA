@@ -11,9 +11,12 @@ import AboutUs from '../GenericPages/AboutUs';
 import Subscribe from '../GenericPages/Subscription';
 
 import style from './Main.module.css';
-import { isUserLogged } from '../../services/usersService';
+import { useContext } from 'react';
+import { AuthContext } from '../Contexts/AuthContext';
 
-function Main(key) {
+function Main() {
+  const { isUserLogged } = useContext(AuthContext);
+
 
   return (
     <>

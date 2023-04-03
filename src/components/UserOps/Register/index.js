@@ -1,46 +1,96 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Col } from 'react-bootstrap';
 import { MDBCheckbox } from 'mdb-react-ui-kit';
 
 import style from './Register.module.css';
+import { useForm } from '../../Hooks/useForm';
+import { AuthContext } from '../../Contexts/AuthContext';
 
 function Register() {
   document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
   
-  return (
+    const { onRegisterSubmit } = useContext(AuthContext);
+    const {values, changeHandler, onSubmit} = useForm({
+        email: '',
+        username: '',
+        pictureURL: '',
+        password: '',
+        passwordConfirm: ''
+    }, onRegisterSubmit);
+
+    return (
     <Col md={6} style={{minHeight:"720px"}}>
     {
         <div className={style.loginFormContainer}>
-        <img className={style.headImg} src="/images/register-banner.png"/>
-        <Form className={style.loginForm}>
+        <img className={style.headImg} src="/images/register-banner.png" alt='register banner'/>
+        <Form className={style.loginForm} onSubmit={onSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
-                    <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text>
+                <Form.Label>Email address<sup className="req"> *</sup></Form.Label>
+                <Form.Control 
+                    type="email" 
+                    placeholder="Enter email" 
+                    name="email"
+                    value={values.email} 
+                    onChange={changeHandler}
+                    required
+                />
+                    
+
+                <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formUserName">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Enter username" />
+                <Form.Label>Username<sup className="req"> *</sup></Form.Label>
+                <Form.Control 
+                    type="text" 
+                    name="username" 
+                    placeholder="Enter username"
+                    value={values.username} 
+                    onChange={changeHandler}
+                    required
+                    />
+
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="pImageUrl">
-                    <Form.Label>Profile picture URL</Form.Label>
-                    <Form.Control type="text" placeholder="Enter picture URL" />
+                <Form.Label>Profile picture URL</Form.Label>
+                <Form.Control 
+                    type="text" 
+                    name="pictureURL" 
+                    placeholder="Enter picture URL" 
+                    value={values.pictureURL} 
+                    onChange={changeHandler}
+                    />
+
+            <Form.Text className="text-muted">Leave empty for a default image.</Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Label>Password<sup className="req"> *</sup></Form.Label>
+                <Form.Control 
+                    type="password" 
+                    name="password" 
+                    placeholder="Password" 
+                    value={values.password} 
+                    onChange={changeHandler}
+                    required
+                    />
+
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Confirm password</Form.Label>
-                <Form.Control type="password" placeholder="Confirm Password" />
+            <Form.Group className="mb-3" controlId="formBasicPasswordConfirm">
+                <Form.Label>Confirm password<sup className="req"> *</sup></Form.Label>
+                <Form.Control 
+                    type="password" 
+                    name="passwordConfirm" 
+                    placeholder="Confirm Password" 
+                    value={values.passwordConfirm} 
+                    onChange={changeHandler}
+                    required
+                    />
+
             </Form.Group>
 
             <div className="d-flex justify-content-between mx-3 mb-4">
@@ -60,7 +110,7 @@ function Register() {
         </div>
     }                        
     </Col>
-  );
+    );
 }
 
 export default Register;

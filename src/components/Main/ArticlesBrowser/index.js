@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { Col } from "react-bootstrap";
 import { getArticles, getFilteredArticles } from '../../../services/articlesGetter';
@@ -8,13 +8,15 @@ import style from './ArticlesBrowser.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { disableLoading, toggleLoading } from '../../../services/loadMoreBtnFuncs';
 import Filter from '../Filter';
-import { isUserLogged, preventNotLogged } from '../../../services/usersService';
+import { preventNotLogged } from '../../../services/usersService';
+import { AuthContext } from '../../Contexts/AuthContext';
 
 
 export default function ArticlesBrowser({tab})
 {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
+    const { dxaUser } = useContext(AuthContext);
     const [filterResult, setFilter] = useState(
         {
             keywords: null,
@@ -112,7 +114,7 @@ export default function ArticlesBrowser({tab})
                                     <div className={style.articleControls}>
                                         <Link to={`/article/${article.uri}`} className={style.articleControlsItem}>| 👁️View</Link>
                                         <a href={""+article.url} className={style.articleControlsItem}>| 📑Check original</a>
-                                        {isUserLogged() ? 
+                                        {dxaUser ? 
                                             <>
                                                 <a className={style.articleControlsItem}>| 💾Save</a>
                                                 <a className={style.articleControlsItem}>| 🧡Like</a>

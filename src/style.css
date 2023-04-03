@@ -9,6 +9,11 @@
     border-bottom: var(--bs-nav-tabs-border-width) solid #4fbe1d;
 }
 
+sup.req{
+    color: red;
+    font-weight: 600;
+}
+
 .floaterRight, .floaterLeft{
     margin: 0 auto;
     width: fit-content;
@@ -61,6 +66,8 @@
     margin-top: 1rem;
     font-size: 1.4rem;
     border-right: 3px solid #4fbe1d;
+    transition: ease-in-out;
+    transition-duration: 0.2s;
 }
 
 h3, .dxa-underlined{
@@ -75,6 +82,8 @@ h3, .dxa-underlined{
 .dxa-popular p{
     font-size: 1.4rem;
     border-left: 3px solid #4fbe1d;
+    transition: ease-in-out;
+    transition-duration: 0.2s;
 }
 
 .dxa-popular p:hover, .floaterRight .list-unstyled li:hover{
@@ -82,8 +91,6 @@ h3, .dxa-underlined{
     border-left: 8px solid #4fbe1d;
     border-bottom: 2px solid #4fbe1d;
     cursor: pointer;
-    transition: ease-in-out;
-    transition-duration: 0.2s;
 }
 
 .floaterRight .list-unstyled li:hover{
