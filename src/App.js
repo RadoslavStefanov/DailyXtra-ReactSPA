@@ -22,28 +22,12 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  const onLoginSubmit = async (data) => {
-    try 
-    {
+  const onLoginSubmit = async (data) => {    
       const result = await logInUser(data,navigate);
-      setAuth(result);
-    } 
-    catch (error) 
-    {
-      console.log('There is a problem');
-    }
   };
 
-  const onRegisterSubmit = async (values) => {
-    try 
-    {
+  const onRegisterSubmit = async (values) => {    
       await registerUser(values, navigate);
-      Navigate('/');
-    } 
-    catch (error) 
-    {
-      console.log(error);
-    }
   };
 
   function isUserLogged() {

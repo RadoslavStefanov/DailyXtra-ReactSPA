@@ -26,16 +26,16 @@ function Login() {
         <img className={style.headImg} src="/images/login-banner.png" alt='login banner'/>
         <Form onSubmit={onSubmit} className={style.loginForm}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email"  value={values.email} onChange={changeHandler} placeholder="Enter email" />
+                    <Form.Label>Email address<sup className="req"> *</sup></Form.Label>
+                    <Form.Control type="email" name='email' value={values.email} onChange={changeHandler} placeholder="Enter email" />
                     <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                     </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" value={values.password} onChange={changeHandler} placeholder="Password" />
+                <Form.Label>Password<sup className="req"> *</sup></Form.Label>
+                <Form.Control type="password" name='password' value={values.password} onChange={changeHandler} placeholder="Password" />
             </Form.Group>
             
             <div className="d-grid gap-2">

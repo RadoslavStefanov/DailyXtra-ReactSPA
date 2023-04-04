@@ -14,10 +14,7 @@ export default function UserPanel()
         .then(res => 
             {
                 if(res)
-                {
-                    console.log(res);
                     setUserDetails(res);
-                }
             })
     },[isUserLogged])
 

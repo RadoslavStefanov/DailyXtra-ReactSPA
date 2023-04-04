@@ -5,12 +5,12 @@ const token = window.sessionStorage.getItem("token");
 
 window.sessionStorage.removeItem("token");*/
 
-import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, set, get, child, onValue } from "firebase/database";
 import { toast } from "react-toastify";
 
 let errorMessages = {
-    452: "{452} Please fill all required fields before registering!",
+    452: "{452} Please fill all required fields!",
     453: "{453} The password must be at least 8 characters long!",
     454: "{454} The passwords don't match!",
     455: "{455} Username is too short!",
@@ -30,7 +30,8 @@ let notificationMessages = {
     105: "{105} Register has been successful!",
     106: "{106} Informations update successful!",
     107: "{107} Aticle added to favorites!",
-    108: "{108} You are logged in automatically!"
+    108: "{108} You are logged in automatically!",
+    109: "{109} Successfully logged in!"
 }
 
 let registerRequiredField = [
@@ -52,7 +53,6 @@ export const getUserInfo = async () =>
         {
             if (snapshot.exists()) 
             {
-                console.log(snapshot.val());
                 return snapshot.val()
             } else 
             {
@@ -83,10 +83,24 @@ export function logOutUser(navHook)
     });
 }
 
-export function logInUser()
+export function logInUser(data,navHook)
 {
-    //isUserLogged logic
-    return false;
+    if(!data.email || !data.password)    
+    {
+        toast.error(errorMessages[452]);
+        return false;
+    }
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, data.email, data.password)
+    .then((userCredential) => {
+        toast.success(notificationMessages[109]);
+        navHook('/')
+    })
+    .catch((error) => {
+        toast.error(error.message);
+        return false;
+    });
 }
 
 export function preventNotLogged(tab, navHook)
@@ -152,7 +166,6 @@ async function createUser(values)
     createUserWithEmailAndPassword(auth, values["email"], values["password"])
     .then((userCredential) => {
         const userRef = ref(db, 'users/' + userCredential.user.uid);
-        console.log(userRef);
         set(ref(db, 'users/' + userCredential.user.uid), {
             username: values["username"],
             email: values["email"],
