@@ -148,9 +148,6 @@ export async function registerUser(values, navHook)
         }   
 
         createUser(values);
-        toast.success(notificationMessages[105]);
-        toast.success(notificationMessages[108]);
-        navHook('/')
     }
     catch(e)
     {        
@@ -159,7 +156,7 @@ export async function registerUser(values, navHook)
     }
 }
 
-async function createUser(values)
+async function createUser(values, navHook)
 {
     const auth = getAuth();
     const db = getDatabase();
@@ -170,8 +167,12 @@ async function createUser(values)
             username: values["username"],
             email: values["email"],
             profile_picture : values["pictureURL"]
+            
         });
-        // ...
+        
+        toast.success(notificationMessages[105]);
+        toast.success(notificationMessages[108]);
+        navHook('/')
     })
     .catch((error) => {
         toast.error(error.message);
