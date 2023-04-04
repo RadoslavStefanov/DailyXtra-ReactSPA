@@ -16,7 +16,7 @@ export default function ArticlesBrowser({tab})
 {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
-    const { dxaUser } = useContext(AuthContext);
+    const { isUserLogged } = useContext(AuthContext);
     const [filterResult, setFilter] = useState(
         {
             keywords: null,
@@ -114,7 +114,7 @@ export default function ArticlesBrowser({tab})
                                     <div className={style.articleControls}>
                                         <Link to={`/article/${article.uri}`} className={style.articleControlsItem}>| 👁️View</Link>
                                         <a href={""+article.url} className={style.articleControlsItem}>| 📑Check original</a>
-                                        {dxaUser ? 
+                                        {isUserLogged() ? 
                                             <>
                                                 <a className={style.articleControlsItem}>| 💾Save</a>
                                                 <a className={style.articleControlsItem}>| 🧡Like</a>
