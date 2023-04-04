@@ -61,7 +61,7 @@ sup.req{
     font-size: 1.4rem;
 }
 
-.floaterRight .list-unstyled li, .floaterRight .list-unstyled a
+.floaterRight .list-unstyled li
 {
     color: #1d2226;
     text-decoration: none;
@@ -70,6 +70,11 @@ sup.req{
     border-right: 3px solid #4fbe1d;
     transition: ease-in-out;
     transition-duration: 0.2s;
+}
+
+.floaterRight .list-unstyled a{
+    text-decoration: none;
+    color: #1d2226;
 }
 
 h3, .dxa-underlined{

@@ -47,7 +47,8 @@ export default function UserPanel()
                             <div className="userImgSmall" style={{background:"url(https://www.pngfind.com/pngs/m/188-1886054_confused-person-png-surprise-guest-transparent-png.png) center no-repeat"}}></div>
                         </div>
                         <ul className="list-unstyled">
-                            <Link to="/login">Login 🔐</Link>
+                            <li><Link to="/login">Login 🔐</Link></li>
+                            <li><Link to="/register">Register 🙆🏽‍♂️</Link></li>  
                         </ul>
                     </div>  
                 </>

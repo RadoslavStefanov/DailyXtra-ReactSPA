@@ -7,6 +7,7 @@ import { MDBCheckbox } from 'mdb-react-ui-kit';
 import style from './Register.module.css';
 import { useForm } from '../../Hooks/useForm';
 import { AuthContext } from '../../Contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 function Register() {
   document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
@@ -92,19 +93,13 @@ function Register() {
                     />
 
             </Form.Group>
-
-            <div className="d-flex justify-content-between mx-3 mb-4">
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                <a href="!#">Forgot password?</a>
-            </div>
-
             
             <div className="d-grid gap-2">
                 <Button type="submit" variant='success'>Sign in</Button>
             </div>
 
             <div className="text-center">
-                <p>Not a member? <a href="#!">Register</a></p>
+                <p>Already a member? <Link to="/login">Login</Link></p>
             </div>
         </Form>
         </div>
