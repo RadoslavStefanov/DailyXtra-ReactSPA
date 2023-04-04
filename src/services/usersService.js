@@ -105,11 +105,11 @@ export function logInUser(data,navHook)
     });
 }
 
-export async function editUser(data,userDetails,handleClose)
+export async function editUser(data,dxaUser,handleClose)
 {
     
     //MARK! Need to make the checks a method!
-    if(data.username === userDetails.username){
+    if(data.username === dxaUser.displayName){
         toast.error(errorMessages[464]);
         return;
     }
@@ -130,16 +130,27 @@ export async function editUser(data,userDetails,handleClose)
         return;
     }
 
-    if(data.profile_picture === userDetails.profile_picture){
+    if(data.profile_picture === dxaUser.photoURL){
         toast.error(errorMessages[465]);
         return;
     }
 
-    if(data.profile_picture === userDetails.profile_picture){
-        toast.error(errorMessages[465]);
-        return;
-    }
-    applyUserChanges(data, handleClose);
+    if(data.profile_picture.length<=0)
+        data.profile_picture = "https://www.pngfind.com/pngs/m/188-1886054_confused-person-png-surprise-guest-transparent-png.png"
+    else
+    {
+        let isImage = await isImageUrl(data.profile_picture)
+        if(!isImage) 
+        {
+            toast.error(errorMessages[458]);
+            return;
+        }
+    }   
+
+
+
+    applyUserChanges(data);
+    handleClose();
 }
 
 export function preventNotLogged(tab, navHook)
@@ -201,13 +212,15 @@ async function createUser(values, navHook)
     const db = getDatabase();
     createUserWithEmailAndPassword(auth, values["email"], values["password"])
     .then((userCredential) => {
-        const userRef = ref(db, 'users/' + userCredential.user.uid);
-        set(ref(db, 'users/' + userCredential.user.uid), {
+        const userRef = ref(db, 'usersDetails/' + userCredential.user.uid);
+        set(ref(db, 'usersDetails/' + userCredential.user.uid), {
             username: values["username"],
             email: values["email"],
             profile_picture : values["pictureURL"]
             
         });
+
+        fillUserInfo(values)
 
         toast.success(notificationMessages[105]);
         toast.success(notificationMessages[108]);
@@ -254,7 +267,18 @@ function isImageUrl(url) {
     });
 }
 
-function applyUserChanges(data, handleClose){
+function fillUserInfo(values){
+    const auth = getAuth();
+    updateProfile(auth.currentUser, {
+    displayName: values["username"] , photoURL: values["pictureURL"]
+    })
+    .catch((error) => {
+        toast.error(error.message);
+        return false;
+    });
+}
+
+function applyUserChanges(data){
     const auth = getAuth();
     updateProfile(auth.currentUser, {
     displayName: data.username , photoURL: data.profile_picture

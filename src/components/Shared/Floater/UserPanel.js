@@ -1,23 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
-import { getUserInfo } from "../../../services/usersService";
 import { Link } from "react-router-dom";
 
 export default function UserPanel()
 {
     const { isUserLogged, dxaUser, logOut } = useContext(AuthContext);
-    const [userDetails, setUserDetails] = useState({});
-
-    useEffect(() => 
-    {   
-        getUserInfo(dxaUser)
-        .then(res => 
-            {
-                if(res)
-                    setUserDetails(res);
-            })
-    },[isUserLogged])
-
     return(
         <>
             {isUserLogged() ? 
@@ -25,8 +12,8 @@ export default function UserPanel()
                     <div className="py-3 floaterRight">
                         
                         <div className="dxa-underlined">
-                            <strong>{userDetails.username}</strong>
-                            <div className="userImgSmall" style={{background:`url(${userDetails.profile_picture}) center no-repeat`}}></div>
+                            <strong>{dxaUser.displayName}</strong>
+                            <div className="userImgSmall" style={{background:`url(${dxaUser.photoURL}) center no-repeat`}}></div>
                         </div>
                         <ul className="list-unstyled">
                             <li><Link to="profile">Profile 👤</Link></li>

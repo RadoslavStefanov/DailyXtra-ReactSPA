@@ -10,17 +10,6 @@ function Profile() {
     document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
 
     const { isUserLogged, dxaUser, logOut } = useContext(AuthContext);
-    const [userDetails, setUserDetails] = useState({});
-
-    useEffect(() => 
-    {   
-        getUserInfo(dxaUser)
-        .then(res => 
-            {
-                if(res)
-                    setUserDetails(res);
-            })
-    },[isUserLogged])
   
     return (
       <Col md={6} style={{minHeight:"720px"}}>
@@ -30,16 +19,15 @@ function Profile() {
                 <>
                     <img className={style.headImg} src="/images/page-banner.png" alt='page banner'/>
                     <div className={style.profileHeader}>
-                        <h1>{userDetails.username}</h1>
+                        <h1>{dxaUser.displayName}</h1>
                     </div>
-                    <img src={`${userDetails.profile_picture}`} className={style.profileImage} />
+                    <img src={`${dxaUser.photoURL}`} className={style.profileImage} />
                     <div className={style.userInfo}>
                         <div>
                             <p><strong>📧 Email: </strong>{dxaUser.email}</p>
-                            <p><strong>📛 Username: </strong>{userDetails.username}</p>
+                            <p><strong>📛 Username: </strong>{dxaUser.displayName}</p>
                             <EditUserModal 
-                                userDetails = {userDetails}
-                                dxaUser = {{dxaUser}}
+                                dxaUser = {dxaUser}
                             />
                                   
                         </div>

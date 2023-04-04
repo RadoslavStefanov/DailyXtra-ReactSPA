@@ -4,7 +4,7 @@ import Footer from "./components/Shared/Footer";
 import Main from "./components/Main";
 import Toastr from "./components/Shared/Toastr";
 import { AuthContext } from './components/Contexts/AuthContext';
-import { editUser, logInUser, logOutUser, registerUser } from './services/usersService';
+import { logInUser, logOutUser, registerUser } from './services/usersService';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
