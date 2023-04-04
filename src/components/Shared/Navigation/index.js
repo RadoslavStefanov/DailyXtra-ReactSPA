@@ -23,7 +23,7 @@ function Navigation() {
           </Nav>
           {isUserLogged() ? 
               <Nav>
-                <NavLink to="myprofile" className={styles.vertFix}>Profile</NavLink>
+                <NavLink to="profile" className={styles.vertFix}>Profile</NavLink>
                 <NavLink to="foryou" className={styles.accentNavBtn}>For YOU</NavLink>
               </Nav>                                           
               :

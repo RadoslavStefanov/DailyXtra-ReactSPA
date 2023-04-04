@@ -13,6 +13,7 @@ import Subscribe from '../GenericPages/Subscription';
 import style from './Main.module.css';
 import { useContext } from 'react';
 import { AuthContext } from '../Contexts/AuthContext';
+import Profile from '../UserOps/Profile';
 
 function Main() {
   const { isUserLogged } = useContext(AuthContext);
@@ -48,6 +49,7 @@ function Main() {
                 <Route path="/filter" element={<ArticlesBrowser tab={"filter"}/>}/>
                 <Route path="/foryou" element={<ArticlesBrowser tab={"foryou"}/>}/>
                 <Route path="/login" element={<Login/>}/>
+                <Route path="/profile" element={<Profile/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/aboutus" element={<AboutUs/>}/>
                 <Route path="/subscribe" element={<Subscribe/>}/>

@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Col } from 'react-bootstrap';
-import { MDBCheckbox } from 'mdb-react-ui-kit';
 
 import style from './Login.module.css';
 import { useForm } from '../../Hooks/useForm';

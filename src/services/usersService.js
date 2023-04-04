@@ -5,7 +5,7 @@ const token = window.sessionStorage.getItem("token");
 
 window.sessionStorage.removeItem("token");*/
 
-import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, updateProfile  } from "firebase/auth";
 import { getDatabase, ref, set, get, child, onValue } from "firebase/database";
 import { toast } from "react-toastify";
 
@@ -22,6 +22,8 @@ let errorMessages = {
     461: "{461} Email is not valid!",
     462: "{462} User info update failed! Try again!",
     463: "{463} This articles is already in you favorites!",
+    464: "{464} There is no change to the username!",
+    465: "{465} There is no change to the image URL!",
     512: "{512} Server error occurred! Please try again later!"
 }
 
@@ -31,7 +33,8 @@ let notificationMessages = {
     106: "{106} Informations update successful!",
     107: "{107} Aticle added to favorites!",
     108: "{108} You are logged in automatically!",
-    109: "{109} Successfully logged in!"
+    109: "{109} Successfully logged in!",
+    110: "{110} Successfully applied changed!"
 }
 
 let registerRequiredField = [
@@ -87,8 +90,7 @@ export function logInUser(data,navHook)
 {
     if(!data.email || !data.password)    
     {
-        toast.error(errorMessages[452]);
-        return false;
+        
     }
 
     const auth = getAuth();
@@ -101,6 +103,43 @@ export function logInUser(data,navHook)
         toast.error(error.message);
         return false;
     });
+}
+
+export async function editUser(data,userDetails,handleClose)
+{
+    
+    //MARK! Need to make the checks a method!
+    if(data.username === userDetails.username){
+        toast.error(errorMessages[464]);
+        return;
+    }
+
+    if(data.username.length < 6){
+        toast.error(errorMessages[455]);
+        return;
+    }
+
+    if(data.username.length > 20){
+        toast.error(errorMessages[456]);
+        return;
+    }
+
+    const isUsernameUnique = await usernameExists(data.username)
+    if(!isUsernameUnique){
+        toast.error(errorMessages[457]);
+        return;
+    }
+
+    if(data.profile_picture === userDetails.profile_picture){
+        toast.error(errorMessages[465]);
+        return;
+    }
+
+    if(data.profile_picture === userDetails.profile_picture){
+        toast.error(errorMessages[465]);
+        return;
+    }
+    applyUserChanges(data, handleClose);
 }
 
 export function preventNotLogged(tab, navHook)
@@ -126,7 +165,7 @@ export async function registerUser(values, navHook)
         const isUsernameUnique = await usernameExists(values.username);
         if (!isUsernameUnique) throw new Error(457);
 
-        if(values["username"].length < 8)
+        if(values["username"].length < 6)
             throw new Error(455)
 
         if(values["username"].length > 20)
@@ -212,5 +251,19 @@ function isImageUrl(url) {
         resolve(false);
       };
       img.src = url;
+    });
+}
+
+function applyUserChanges(data, handleClose){
+    const auth = getAuth();
+    updateProfile(auth.currentUser, {
+    displayName: data.username , photoURL: data.profile_picture
+    }).then(() => 
+    {
+        toast.success(notificationMessages[110]);
+    })
+    .catch((error) => {
+        toast.error(error.message);
+        return false;
     });
 }

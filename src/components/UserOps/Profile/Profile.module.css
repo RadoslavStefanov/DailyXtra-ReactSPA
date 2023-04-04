@@ -1,0 +1,22 @@
+.headImg{
+    width: 50%; 
+    margin: 0 auto; 
+    display: block;
+}
+
+.profileHeader{
+    text-align: center;
+    margin-bottom: 1rem;
+    border-bottom: 2px dashed gray;
+}
+
+.profileImage{
+    width: 30%;
+    float: left;
+    margin: 0 1rem 1rem 0;
+    border-bottom: 6px solid #4fbe1d;;
+}
+
+.userInfo p{
+    font-size: 1.2rem;
+}

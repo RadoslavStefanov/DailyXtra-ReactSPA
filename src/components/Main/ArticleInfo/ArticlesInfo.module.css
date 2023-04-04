@@ -1,18 +1,3 @@
-.browserTabs{
-    margin-top: 2rem;
-    justify-content: center;
-    display: flex;
-    border-bottom: 2px solid#4fbe1d;
-}
-
-.browserTabs a{
-    color: #3a3d40;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-top-right-radius: 0.5rem;
-    border-top-left-radius: 0.5rem;
-}
-
 .backButton{
     float: left;
     border: none;

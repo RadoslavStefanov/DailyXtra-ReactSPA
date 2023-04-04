@@ -4,9 +4,9 @@ import Footer from "./components/Shared/Footer";
 import Main from "./components/Main";
 import Toastr from "./components/Shared/Toastr";
 import { AuthContext } from './components/Contexts/AuthContext';
-import { logInUser, logOutUser, registerUser } from './services/usersService';
+import { editUser, logInUser, logOutUser, registerUser } from './services/usersService';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const [auth, setAuth] = useState({});
@@ -23,11 +23,11 @@ function App() {
   }, []);
 
   const onLoginSubmit = async (data) => {    
-      const result = await logInUser(data,navigate);
+    await logInUser(data,navigate);
   };
 
   const onRegisterSubmit = async (values) => {    
-      await registerUser(values, navigate);
+    await registerUser(values, navigate);
   };
 
   function isUserLogged() {

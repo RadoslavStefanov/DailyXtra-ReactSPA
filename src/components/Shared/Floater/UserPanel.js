@@ -29,9 +29,10 @@ export default function UserPanel()
                             <div className="userImgSmall" style={{background:`url(${userDetails.profile_picture}) center no-repeat`}}></div>
                         </div>
                         <ul className="list-unstyled">
-                            <li>Profile 👤</li>
-                            <li>Settings ⚙️</li>
+                            <li><Link to="profile">Profile 👤</Link></li>
+                            <li>Read later 📜</li>
                             <li>Prefences 🎭</li>
+                            <li>Liked 🧡</li>
                             <li onClick={logOut}>Logout 🔐</li>
                         </ul>
                     </div>                                   

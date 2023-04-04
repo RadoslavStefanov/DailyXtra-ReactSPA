@@ -39,7 +39,7 @@ export default function Footer() {
                 DailyXtra
               </h6>
               <p>
-                DailyXtra is a cutting-edge web app that provides users with up-to-date news from over 80,000 different news sites. Founded in late 2019, our company is committed to delivering the latest information on a wide range of topics, from business and politics to technology and entertainment.
+                DailyXtra is a cutting-edge web app that provides users with up-to-date news from over 150,000 different news sites. Founded in late 2019, our company is committed to delivering the latest information on a wide range of topics, from business and politics to technology and entertainment.
               </p>
             </MDBCol>
 

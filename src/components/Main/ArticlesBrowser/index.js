@@ -116,12 +116,12 @@ export default function ArticlesBrowser({tab})
                                         <a href={""+article.url} className={style.articleControlsItem}>| 📑Check original</a>
                                         {isUserLogged() ? 
                                             <>
-                                                <a className={style.articleControlsItem}>| 💾Save</a>
+                                                <a className={style.articleControlsItem}>| 📜Read later</a>
                                                 <a className={style.articleControlsItem}>| 🧡Like</a>
                                             </>                                            
                                             :
                                             <>
-                                                <a className={style.articleDisabledControlsItem}>| 💾Save</a>
+                                                <a className={style.articleDisabledControlsItem}>| 📜Read later</a>
                                                 <a className={style.articleDisabledControlsItem}>| 🧡Like</a>
                                             </>
                                         }
