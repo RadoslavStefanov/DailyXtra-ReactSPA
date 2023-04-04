@@ -1,10 +1,3 @@
-/*const token = "your-session-token";
-window.sessionStorage.setItem("token", token);
-
-const token = window.sessionStorage.getItem("token");
-
-window.sessionStorage.removeItem("token");*/
-
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, updateProfile  } from "firebase/auth";
 import { getDatabase, ref, set, get, child, onValue } from "firebase/database";
 import { toast } from "react-toastify";

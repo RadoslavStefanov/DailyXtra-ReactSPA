@@ -9,7 +9,7 @@ function Profile() {
 
     document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
 
-    const { isUserLogged, dxaUser, logOut } = useContext(AuthContext);
+    const { isUserLogged, dxaUser } = useContext(AuthContext);
   
     return (
       <Col md={6} style={{minHeight:"720px"}}>
