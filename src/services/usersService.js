@@ -147,7 +147,7 @@ export async function registerUser(values, navHook)
             {throw new Error(458);}
         }   
 
-        createUser(values);
+        createUser(values, navHook);
     }
     catch(e)
     {        
@@ -169,7 +169,7 @@ async function createUser(values, navHook)
             profile_picture : values["pictureURL"]
             
         });
-        
+
         toast.success(notificationMessages[105]);
         toast.success(notificationMessages[108]);
         navHook('/')
