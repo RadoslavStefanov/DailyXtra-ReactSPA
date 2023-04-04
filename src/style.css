@@ -61,8 +61,10 @@ sup.req{
     font-size: 1.4rem;
 }
 
-.floaterRight .list-unstyled li
+.floaterRight .list-unstyled li, .floaterRight .list-unstyled a
 {
+    color: #1d2226;
+    text-decoration: none;
     margin-top: 1rem;
     font-size: 1.4rem;
     border-right: 3px solid #4fbe1d;

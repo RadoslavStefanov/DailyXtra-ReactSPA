@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { getUserInfo } from "../../../services/usersService";
+import { Link } from "react-router-dom";
 
 export default function UserPanel()
 {
-    const { isUserLogged, dxaUser } = useContext(AuthContext);
+    const { isUserLogged, dxaUser, logOut } = useContext(AuthContext);
     const [userDetails, setUserDetails] = useState({});
 
     useEffect(() => 
@@ -34,7 +35,7 @@ export default function UserPanel()
                             <li>Profile 👤</li>
                             <li>Settings ⚙️</li>
                             <li>Prefences 🎭</li>
-                            <li>Logout 🔐</li>
+                            <li onClick={logOut}>Logout 🔐</li>
                         </ul>
                     </div>                                   
                 :
@@ -46,7 +47,7 @@ export default function UserPanel()
                             <div className="userImgSmall" style={{background:"url(https://www.pngfind.com/pngs/m/188-1886054_confused-person-png-surprise-guest-transparent-png.png) center no-repeat"}}></div>
                         </div>
                         <ul className="list-unstyled">
-                            <li>Login 🔐</li>
+                            <Link to="/login">Login 🔐</Link>
                         </ul>
                     </div>  
                 </>

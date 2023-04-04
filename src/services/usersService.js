@@ -5,7 +5,7 @@ const token = window.sessionStorage.getItem("token");
 
 window.sessionStorage.removeItem("token");*/
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { getDatabase, ref, set, get, child, onValue } from "firebase/database";
 import { toast } from "react-toastify";
 
@@ -20,7 +20,17 @@ let errorMessages = {
     459: "{459} Picture URL is too long!",
     460: "{460} Email address already in use!",
     461: "{461} Email is not valid!",
+    462: "{462} User info update failed! Try again!",
+    463: "{463} This articles is already in you favorites!",
     512: "{512} Server error occurred! Please try again later!"
+}
+
+let notificationMessages = {
+    104: "{104} You logged out successfully!",
+    105: "{105} Register has been successful!",
+    106: "{106} Informations update successful!",
+    107: "{107} Aticle added to favorites!",
+    108: "{108} You are logged in automatically!"
 }
 
 let registerRequiredField = [
@@ -58,6 +68,21 @@ export const getUserInfo = async () =>
     }    
 }
 
+export function logOutUser(navHook)
+{
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        toast.success(notificationMessages[104]);
+        navHook('/');
+        return true;
+    })
+    .catch((e) => 
+    {
+        toast.error(errorMessages[e.message]);
+        return false;
+    });
+}
+
 export function logInUser()
 {
     //isUserLogged logic
@@ -74,7 +99,7 @@ export function preventNotLogged(tab, navHook)
     }      
 }
 
-export async function registerUser(values)
+export async function registerUser(values, navHook)
 {
     try
     {
@@ -109,6 +134,9 @@ export async function registerUser(values)
         }   
 
         createUser(values);
+        toast.success(notificationMessages[105]);
+        toast.success(notificationMessages[108]);
+        navHook('/')
     }
     catch(e)
     {        

@@ -1,68 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigation from "./components/Shared/Navigation";
 import Footer from "./components/Shared/Footer";
 import Main from "./components/Main";
 import Toastr from "./components/Shared/Toastr";
-
 import { AuthContext } from './components/Contexts/AuthContext';
-import { Navigate } from 'react-router-dom';
-import { logInUser, registerUser } from './services/usersService';
-import { getAuth } from "firebase/auth";
-
+import { logInUser, logOutUser, registerUser } from './services/usersService';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function App() {
-
   const [auth, setAuth] = useState({});
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(getAuth(), (user) => {
+      setLoading(false);
+      setAuth(user || {});
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const onLoginSubmit = async (data) => {
-    try {
-        const result = await logInUser(data);
-
-        setAuth(result);
-
-        Navigate('/');
-    } catch (error) {
-        console.log('There is a problem');
+    try 
+    {
+      const result = await logInUser(data,navigate);
+      setAuth(result);
+    } 
+    catch (error) 
+    {
+      console.log('There is a problem');
     }
   };
 
   const onRegisterSubmit = async (values) => {
-    try
+    try 
     {
-      registerUser(values);
+      await registerUser(values, navigate);
       Navigate('/');
-    }
-    catch (error) {
+    } 
+    catch (error) 
+    {
       console.log(error);
     }
   };
 
-  function isUserLogged()  
-  {
-    const auth = getAuth();
-    const user = auth.currentUser;
-
-    if (user) {
-      contextValues.dxaUser = user;
-      return true;
-    } 
-    else {
-      contextValues.dxaUser = null;
-      return false;
-    }
+  function isUserLogged() {
+    return !!auth.uid;
   };
 
-  let contextValues = {
+  function logOut(){
+    logOutUser(navigate);
+  }
+
+  const contextValues = {
     onLoginSubmit,
     onRegisterSubmit,
     isUserLogged,
-    dxaUser: null,
-    //onLogout,
-    //userId: auth._id,
-    //token: auth.accessToken,
-    //userEmail: auth.email,
-    //isAuthenticated: !!auth.accessToken,
+    logOut,
+    dxaUser: auth,
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AuthContext.Provider value={contextValues}>
@@ -70,7 +72,7 @@ function App() {
       <Main/>
       <Footer/>
       <Toastr/>
-    </AuthContext.Provider>      
+    </AuthContext.Provider>
   );
 }
 
