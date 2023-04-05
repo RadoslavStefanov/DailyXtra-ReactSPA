@@ -31,16 +31,14 @@ export const getArticles = async ({pageNumber, tabKey}) => {
     return JSON.parse(string).articles;*/
 }
 
-export const getFilteredArticles = async ({pageNumber, tabKey}, filterObj) => {
-    let pathSuffix = generatePathFromFilter({filterObj},pageNumber)    
+export const getFilteredArticles = async ({pageNumber}, filterObj, isForYou) => {
+    let pathSuffix = generatePathFromFilter({filterObj} ,pageNumber, isForYou)    
     let fetchUrl = `${searchConfig._baseUrl}${pathSuffix}&apiKey=${getNewsKey()}`; 
 
     let responce = await fetch(fetchUrl)    
     let result = await responce.json();
 
     return result.articles.results;
-    /*let string = getMockData();
-    return JSON.parse(string).articles;*/
 }
 
 export const getArticleById = async (articleId) => {  
@@ -56,7 +54,7 @@ export const getArticleById = async (articleId) => {
     return result.articles.results[0];
 }
 
-function generatePathFromFilter({filterObj},pageNumber)
+function generatePathFromFilter({filterObj}, pageNumber, isForYou)
 {
     let searchObj = {
         keyword: "anything",
@@ -66,11 +64,25 @@ function generatePathFromFilter({filterObj},pageNumber)
         articlesCount: 10
     }
 
-    if(filterObj.keywords && filterObj.keywords.length > 0)
-    {searchObj.keyword = filterObj.keywords.slice(0, 5).map(obj => obj.value).join(',');}
+    if(!isForYou)
+    {
+        if(filterObj.keywords && filterObj.keywords.length > 0)
+        {searchObj.keyword = filterObj.keywords.slice(0, 5).map(obj => obj.value).join(',');}
 
-    if(filterObj.language && filterObj.language.length > 0)
-    {searchObj.lang = filterObj.language.slice(0, 5).map(obj => obj.value).join(',');}
+        if(filterObj.language && filterObj.language.length > 0)
+        {searchObj.lang = filterObj.language.slice(0, 5).map(obj => obj.value).join(',');}
+    }
+    else
+    {
+        if(filterObj.keywords && filterObj.keywords.length > 0)
+        {searchObj.keyword = filterObj.keywords.slice(0, 5).map(obj => obj).join(',');}
+
+        if(filterObj.language && filterObj.language.length > 0)
+        {
+            filterObj.language = filterObj.language.map(l => l === "English" ? "eng": "bul")
+            searchObj.lang = filterObj.language.slice(0, 5).map(obj => obj).join(',');
+        }
+    }
     
     
     if(filterObj.sortOrder)
@@ -107,7 +119,7 @@ function stringifyCriterias()
     let str = "";
 
     if (searchConfig._keyWord.length === 0) {
-    str = '"everything"';
+    str = "everything";
     } else if (searchConfig._keyWord.length === 1) {
     str = searchConfig._keyWord[0];
     } else {

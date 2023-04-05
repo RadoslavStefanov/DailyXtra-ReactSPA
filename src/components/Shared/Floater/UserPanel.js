@@ -17,9 +17,8 @@ export default function UserPanel()
                         </div>
                         <ul className="list-unstyled">
                             <li><Link to="profile">Profile 👤</Link></li>
-                            <li>Read later 📜</li>
+                            <li>Saved news 📜</li>
                             <li>Prefences 🎭</li>
-                            <li>Liked 🧡</li>
                             <li onClick={logOut}>Logout 🔐</li>
                         </ul>
                     </div>                                   

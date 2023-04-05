@@ -17,6 +17,7 @@ let errorMessages = {
     463: "{463} This articles is already in you favorites!",
     464: "{464} There is no change to the username!",
     465: "{465} There is no change to the image URL!",
+    466: "{466} You need to have at least one filter to set preferences!",
     512: "{512} Server error occurred! Please try again later!"
 }
 
@@ -199,6 +200,52 @@ export async function registerUser(values, navHook)
     }
 }
 
+export async function setUserPreferences(filterData)
+{
+    try
+    {
+        if(!filterData.keywords && !filterData.language && filterData.sortOrder==='')
+            throw new Error(466)
+
+        let Preferences = 
+        {
+            keywords: extractLabels(filterData.keywords),
+            language: extractLabels(filterData.language),   
+            sortOrder: filterData.sortOrder.length > 0? filterData.sortOrder : null
+        }
+
+        const auth = getAuth();
+        const db = getDatabase();
+        ref(db, 'usersDetails/' + auth.currentUser.uid);
+        set(ref(db, 'usersDetails/' + auth.currentUser.uid), {    
+            Preferences
+        });                
+    }
+    catch(e)
+    {
+        toast.error(errorMessages[e.message]);
+        return false;
+    }
+}
+
+export const getUserPreferences = async () => {  
+    const auth = getAuth();
+    const dbRef = ref(getDatabase());
+    return get(child(dbRef, `usersDetails/${auth.currentUser.uid}`)).then((snapshot) => 
+    {
+        if (snapshot.exists()) {
+            return snapshot.val()
+        } 
+        else {
+            return null;
+        }
+    })
+    .catch((error) => {
+        toast.error(error.message);
+        return false;
+    });
+}
+
 async function createUser(values, navHook)
 {
     const auth = getAuth();
@@ -206,11 +253,7 @@ async function createUser(values, navHook)
     createUserWithEmailAndPassword(auth, values["email"], values["password"])
     .then((userCredential) => {
         const userRef = ref(db, 'usersDetails/' + userCredential.user.uid);
-        set(ref(db, 'usersDetails/' + userCredential.user.uid), {
-            username: values["username"],
-            email: values["email"],
-            profile_picture : values["pictureURL"]
-            
+        set(ref(db, 'usersDetails/' + userCredential.user.uid), {            
         });
 
         fillUserInfo(values)
@@ -283,4 +326,16 @@ function applyUserChanges(data){
         toast.error(error.message);
         return false;
     });
+}
+
+function extractLabels(obj) 
+{
+    if(!obj || obj.length < 1)
+        return null;
+
+    const labels = [];
+    for (let i = 0; i < obj.length; i++) {
+        labels.push(obj[i].label);
+    }
+    return labels;
 }

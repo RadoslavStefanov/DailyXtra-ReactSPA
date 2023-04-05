@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { Col } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 import { getArticles, getFilteredArticles } from '../../../services/articlesGetter';
 import calcTimeAgo from '../../../services/timeCalculator';
 
@@ -8,7 +8,7 @@ import style from './ArticlesBrowser.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { disableLoading, toggleLoading } from '../../../services/loadMoreBtnFuncs';
 import Filter from '../Filter';
-import { preventNotLogged } from '../../../services/usersService';
+import { getUserPreferences, preventNotLogged } from '../../../services/usersService';
 import { AuthContext } from '../../Contexts/AuthContext';
 
 
@@ -16,6 +16,7 @@ export default function ArticlesBrowser({tab})
 {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
+    const [preferences, setPreferences] = useState({});
     const { isUserLogged } = useContext(AuthContext);
     const [filterResult, setFilter] = useState(
         {
@@ -80,7 +81,15 @@ export default function ArticlesBrowser({tab})
 
         markSelectedTab();
 
-        if(tab !== "filter")
+        if(tab === "foryou")
+            getUserPreferences()
+            .then( res => 
+            {   setPreferences(res.Preferences);
+                getFilteredArticles(content, res.Preferences, true)
+                .then(a=> setArticles(a))
+                .catch(err =>{console.error(err)});
+            })     
+        else if(tab !== "filter" && tab !== "foryou")
             getArticles(content)
             .then(a=> setArticles(a))
             .catch(err =>{console.error(err)});
@@ -94,6 +103,18 @@ export default function ArticlesBrowser({tab})
     return(
         <>           
             <Col md={6} style={{minHeight:"720px"}}>
+            {preferences && tab==="foryou" &&
+                <>
+                    <h5>Filters applied:</h5>
+                    <sup style={{display:"block", margin:"1rem 0"}}>*You can change these filters by applying a new filter in "Search" and saving it!</sup>
+                    {preferences && Object.keys(preferences).map(k =>
+                    ( 
+                       <Button variant='success' style={{margin:"0 1rem 2rem 0"}} >{preferences[k]}</Button>
+                    )
+                    )}
+                </>
+            }
+            
             {tab === "filter" && <Filter getFilterConfig={getFilterConfig}/>}
             { articles !== undefined &&
                 <table className={style.contentTable}>
@@ -117,12 +138,10 @@ export default function ArticlesBrowser({tab})
                                         {isUserLogged() ? 
                                             <>
                                                 <a className={style.articleControlsItem}>| 📜Read later</a>
-                                                <a className={style.articleControlsItem}>| 🧡Like</a>
                                             </>                                            
                                             :
                                             <>
                                                 <a className={style.articleDisabledControlsItem}>| 📜Read later</a>
-                                                <a className={style.articleDisabledControlsItem}>| 🧡Like</a>
                                             </>
                                         }
                                         

@@ -7,13 +7,13 @@ import React, { useState } from 'react'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 import MultiCreatable from '../../../services/multiCreatable';
+import { setUserPreferences } from '../../../services/usersService';
 
 function Filter({getFilterConfig}) {
 
     const [filterResult, setFilter] = useState(
         {
             keywords: null,
-            country: '',
             language: null,
             sortOrder: ''
         });
@@ -47,6 +47,9 @@ function Filter({getFilterConfig}) {
         e.preventDefault();
         getFilterConfig(filterResult);
     }
+
+    function sendNewPreferences()
+    { setUserPreferences(filterResult) }
 
     return (
         <>
@@ -92,7 +95,7 @@ function Filter({getFilterConfig}) {
                     </Button>
 
                     <OverlayTrigger placement="top" delay={{ show: 250, hide: 400 }} overlay={renderTooltip}>
-                        <Button type="submit" variant="outline-danger">Save ❤️</Button>
+                        <Button type='button' onClick={sendNewPreferences} variant="outline-danger">Save ❤️</Button>
                     </OverlayTrigger>
                 </Form.Group>
                 
