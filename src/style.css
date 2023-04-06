@@ -178,5 +178,7 @@ a.selected{
     
     td a
     {width: fit-content!important;}
-
+    
+    html,body
+    {overflow-x: hidden;}
 }
