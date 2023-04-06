@@ -35,6 +35,7 @@ To get started with DailyXtra, you will need to follow these steps:
 ![image](https://user-images.githubusercontent.com/72268734/228982732-db8b2ee3-f07e-4e78-b3b1-bfe7b1f05db4.png)
 ![image](https://user-images.githubusercontent.com/72268734/228982750-d2a85287-7b44-4875-aa35-f2117c94c302.png)
 ![image](https://user-images.githubusercontent.com/72268734/228982784-bc832893-4903-430b-9f16-81658c63c447.png)
+![image](https://user-images.githubusercontent.com/72268734/230358699-a58e9ef7-6984-43db-bbe9-0ce705575c7f.png)
 
 
 
