@@ -282,23 +282,6 @@ export const getUserSavedArticles = async () => {
 export const removeSavedArticle = async (id) =>{
     try
     {
-        debugger
-        let entries = await getUserSavedArticles();
-
-        if(!entries)
-        {
-            toast.error(errorMessages[468]);
-            return false;
-        }
-        else if(entries.includes(id))
-            entries.filter(e => e === id)    
-
-        const auth = getAuth();
-        const db = getDatabase();
-        ref(db, 'usersDetails/' + auth.currentUser.uid + "/SavedArticles") ;
-        set(ref(db, 'usersDetails/' + auth.currentUser.uid + "/SavedArticles"), {    
-            entries
-        });         
         toast.success(notificationMessages[112])       
     }
     catch(e)

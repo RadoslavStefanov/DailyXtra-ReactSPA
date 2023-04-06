@@ -9,6 +9,8 @@ import { removeSavedArticle } from '../../../services/usersService';
 import style from './SavedNews.module.css';
 
 export default function SavedNews() {
+  document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
+  
   const [articles, setArticles] = useState([]);
   const { isUserLogged } = useContext(AuthContext);
   const [selectedArticles, setSelectedArticles] = useState([]);
@@ -81,13 +83,14 @@ export default function SavedNews() {
             </tbody>
           </table>
         </>
-      ) : (
+      ) : 
+      (
         <div className={style.errorDiv}>
             <img src="/images/missingSavedNews.png" alt="Missing articles!" />
             <strong>Your "Saved articles" collections is empty!!</strong>
             <p>To fill up your collection click on the <strong className={style.pageExample}>📜 Read later</strong> button under any article. 😊</p>
         </div>
-        )}
+      )}
     </Col>
     )
 }

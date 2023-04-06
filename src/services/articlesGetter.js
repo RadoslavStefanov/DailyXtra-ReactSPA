@@ -57,10 +57,10 @@ export const getArticleById = async (articleId) => {
 }
 
 export const getSavedArticles = async () => {
-    const savedArticles = await getUserSavedArticles();
-    const articlePromises = savedArticles.map((a) => getArticleById(a));
-    const articles = await Promise.all(articlePromises);
-    return articles;
+  const savedArticles = await getUserSavedArticles();
+  const articlePromises = savedArticles.map((a) => getArticleById(a));
+  const articles = await Promise.all(articlePromises);
+  return articles;
 };
 
 function generatePathFromFilter({filterObj}, pageNumber, isForYou)

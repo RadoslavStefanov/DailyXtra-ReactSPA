@@ -14,7 +14,11 @@ function Navigation() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home"><img src="/images/nav-logo.png" className={styles.navLogo}/></Navbar.Brand>
+        <Navbar.Brand>
+          <NavLink to="/">
+            <img src="/images/nav-logo.png" className={styles.navLogo}/>
+          </NavLink>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
