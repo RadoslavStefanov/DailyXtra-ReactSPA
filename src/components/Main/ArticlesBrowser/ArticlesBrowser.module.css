@@ -10,6 +10,7 @@
     font-size: 1.2rem;
     color: #3a3d40;
     gap: 10px;
+    line-height: 2;
 }
 
 .errorDiv > strong{
