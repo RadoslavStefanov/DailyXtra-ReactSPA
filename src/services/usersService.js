@@ -30,9 +30,10 @@ let notificationMessages = {
     107: "{107} Aticle added to favorites!",
     108: "{108} You are logged in automatically!",
     109: "{109} Successfully logged in!",
-    110: "{110} Successfully applied changed!",
+    110: "{110} Successfully applied changes!",
     111: "{111} Article was saved successfully!",
-    112: "{112} Article was removed successfully!"
+    112: "{112} Article was removed successfully!",
+    113: "{113} Preferences saved successfully!"
 }
 
 let registerRequiredField = [
@@ -107,11 +108,6 @@ export async function editUser(data,dxaUser,handleClose)
 {
     
     //MARK! Need to make the checks a method!
-    if(data.username === dxaUser.displayName){
-        toast.error(errorMessages[464]);
-        return;
-    }
-
     if(data.username.length < 6){
         toast.error(errorMessages[455]);
         return;
@@ -223,7 +219,8 @@ export async function setUserPreferences(filterData)
         ref(db, 'usersDetails/' + auth.currentUser.uid);
         set(ref(db, 'usersDetails/' + auth.currentUser.uid), {    
             Preferences
-        });                
+        });               
+        toast.success(notificationMessages[113]) ;
     }
     catch(e)
     {
@@ -233,7 +230,6 @@ export async function setUserPreferences(filterData)
 }
 
 export const getUserPreferences = async () => {  
-    debugger
     const auth = getAuth();
     const dbRef = ref(getDatabase());
     return get(child(dbRef, `usersDetails/${auth.currentUser.uid}`)).then((snapshot) => 

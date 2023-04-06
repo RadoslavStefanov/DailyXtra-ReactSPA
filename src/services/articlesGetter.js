@@ -33,7 +33,6 @@ export const getArticles = async ({pageNumber, tabKey}) => {
 }
 
 export const getFilteredArticles = async ({pageNumber}, filterObj, isForYou) => {
-    debugger
     let pathSuffix = generatePathFromFilter({filterObj} ,pageNumber, isForYou)    
     let fetchUrl = `${searchConfig._baseUrl}${pathSuffix}&apiKey=${getNewsKey()}`; 
 

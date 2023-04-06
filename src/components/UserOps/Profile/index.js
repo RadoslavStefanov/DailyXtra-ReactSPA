@@ -13,16 +13,18 @@ function Profile() {
     document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
 
     const { isUserLogged, dxaUser } = useContext(AuthContext);
-    const [preferences, setPreferences] = useState({});
+    const [preferences, setPreferences] = useState();
 
     useEffect(() => 
     {   
-        if(Object.keys(preferences).length==0)
+        if(preferences)
         {
             getUserPreferences()
             .then( res => 
             {   
-                if(Object.keys(res).length > 0)
+                if(!res)
+                    setPreferences([]);                
+                else if(Object.keys(res).length > 0)
                 {
                     if(Object.keys(res).includes("sortOrder") && res.sortOrder)
                         res.sortOrder = fixSortOrderLabel(res.sortOrder);
