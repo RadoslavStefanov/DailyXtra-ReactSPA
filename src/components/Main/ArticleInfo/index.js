@@ -4,7 +4,7 @@ import { getArticleById } from '../../../services/articlesGetter';
 
 import style from './ArticlesInfo.module.css';
 import { useEffect, useState } from "react";
-import calcTimeAgo from "../../../services/timeCalculator";
+import { calcTimeAgo } from "../../../services/Helper";
 
 export default function ArticlesInfo()
 {
@@ -13,10 +13,9 @@ export default function ArticlesInfo()
     const [article, setArticle] = useState({});
 
     useEffect(() => {   
-        debugger;
         getArticleById(params.id)
         .then(a => setArticle(a))
-    },[])
+    },[params.id])
 
     return (
     <>
@@ -28,11 +27,11 @@ export default function ArticlesInfo()
                         <button className = {style.backButton} onClick={() => {back(-1)}}>Back</button>
                         <h1>{article.title}</h1>
                     </div>
-                    <img src={article.image} className={style.articleImage} />
+                    <img src={article.image} className={style.articleImage} alt="article"/>
                     <div className={style.articleBody}>
                         <div>
                             <p>🕒{calcTimeAgo(article.dateTimePub)} {article.authors && article.authors[0] &&  `| 👨‍🎨${article.authors[0].name}`}</p>
-                            <a href={`${article.url}`} target="_blank">Check Original</a>
+                            <a href={`${article.url}`} target="_blank" rel="noreferrer">Check Original</a>
                         </div>
                         <p>{article.body}</p>
                         <strong>Language: {article.lang}</strong>

@@ -2,15 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import { Button, Col } from "react-bootstrap";
 import { getArticles, getFilteredArticles } from '../../../services/articlesGetter';
-import calcTimeAgo from '../../../services/timeCalculator';
 
 import style from './ArticlesBrowser.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { disableLoading, toggleLoading } from '../../../services/loadMoreBtnFuncs';
 import Filter from '../Filter';
 import { getUserPreferences, preventNotLogged } from '../../../services/usersService';
 import { AuthContext } from '../../Contexts/AuthContext';
-import { getNewGuid } from '../../../services/Helper';
+import { calcTimeAgo, disableLoading, getNewGuid, toggleLoading } from '../../../services/Helper';
 
 
 export default function ArticlesBrowser({tab})
@@ -162,7 +160,7 @@ export default function ArticlesBrowser({tab})
 
             {!preferences && tab==="foryou" &&
                 <div className={style.errorDiv}>
-                    <img src="/images/missingPreferences.png"/>
+                    <img src="/images/missingPreferences.png" alt='Missing criteria!'/>
                     <strong>Missing preferences!</strong>
                     <p>To take advantage of the <strong className={style.pageExample}>❤️ For You</strong> page, select a filter in the <strong className={style.searchExample}>🔎 Search</strong>  page and click the <strong className={style.saveExample}>❤️ Save</strong> button.</p>
                 </div>

@@ -1,5 +1,5 @@
-import { getMockData, getNewsKey } from "../sysInfo/secrets";
-import urlHasImage from "./urlHasImage";
+import { getNewsKey } from "../sysInfo/secrets";
+import { urlHasImage } from "./Helper";
 
 //Defaults
 let searchConfig =
