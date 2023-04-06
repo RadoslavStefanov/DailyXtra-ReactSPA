@@ -19,6 +19,15 @@ export const getArticles = async ({pageNumber, tabKey}) => {
         searchConfig._keyWord = ["global"];
     else if(tabKey==="hot")
         searchConfig._keyWord = ["hot"];
+    else if(tabKey==="politics")
+        searchConfig._keyWord = ["politics"];
+    else if(tabKey==="sports")
+        searchConfig._keyWord = ["sports"];
+    else if(tabKey==="entertainment")
+        searchConfig._keyWord = ["entertainment"];
+    else if(tabKey==="techworld")
+        searchConfig._keyWord = ["technology"];
+    
 
     let criterias = stringifyCriterias();
     let fetchUrl = `${searchConfig._baseUrl}?keyword=${criterias}&articlesCount=10&articlesPage=${pageNumber}&apiKey=${getNewsKey()}`; 

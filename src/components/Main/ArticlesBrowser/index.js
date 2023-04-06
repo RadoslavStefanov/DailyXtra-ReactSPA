@@ -107,6 +107,12 @@ export default function ArticlesBrowser({tab})
     return(
         <>           
             <Col md={6} style={{minHeight:"720px"}}>
+            {tab !== "hot" && tab!=="global" && tab!=="search" && tab!=="foryour"&&
+                <>
+                    <img className={style.headImg} src="/images/page-banner.png" alt="page banner" />
+                    <h2>Section: {tab}</h2>
+                </>
+            }
             {preferences && tab==="foryou" &&
                 <>
                     <h5>Preferences applied:</h5>

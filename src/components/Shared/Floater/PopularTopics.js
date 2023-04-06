@@ -1,14 +1,20 @@
+import { Link } from "react-router-dom";
+
 export default function PopularTopics()
 {
     const hotTopics = [
         {
-          name: '👨🏻‍⚖️Politics'
+          name: '👨🏻‍⚖️Politics',
+          tab: 'politics'
         },{
-          name: '🏆Sports'
+          name: '🏆Sports',
+          tab: 'sports'
         },{
-          name: '🎮Entertainment'
+          name: '🎮Entertainment',
+          tab: 'entertainment'
         },{
-          name: '📱Tech World'
+          name: '📱Tech World',
+          tab: 'techworld'
         },
       ];
 
@@ -20,7 +26,7 @@ export default function PopularTopics()
               <div>
                 {hotTopics.map((topic, i) => (
                   <div key={i} className="my-4">
-                    <p>{topic.name}</p>
+                    <Link to={`/${topic.tab}`}>{topic.name}</Link>
                   </div>
                 ))}
               </div>

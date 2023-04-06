@@ -47,6 +47,10 @@ function Main() {
           <Routes>
                 <Route path="/" element={<ArticlesBrowser tab={"global"}/>}/>
                 <Route path="/hot" element={<ArticlesBrowser tab={"hot"}/>}/>
+                <Route path="/politics" element={<ArticlesBrowser tab={"politics"}/>}/>
+                <Route path="/sports" element={<ArticlesBrowser tab={"sports"}/>}/>
+                <Route path="/entertainment" element={<ArticlesBrowser tab={"entertainment"}/>}/>
+                <Route path="/techworld" element={<ArticlesBrowser tab={"techworld"}/>}/>
                 <Route path="/filter" element={<ArticlesBrowser tab={"filter"}/>}/>
                 <Route path="/foryou" element={<ArticlesBrowser tab={"foryou"}/>}/>
                 <Route path="/savednews" element={<SavedNews/>}/>

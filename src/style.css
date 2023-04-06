@@ -14,6 +14,17 @@ sup.req{
     font-weight: 600;
 }
 
+h2{
+    text-transform: capitalize;
+}
+
+.floaterLeft a{
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: #1d2226;
+    
+}
+
 .floaterRight, .floaterLeft{
     margin: 0 auto;
     width: fit-content;
@@ -61,7 +72,7 @@ sup.req{
     font-size: 1.4rem;
 }
 
-.floaterRight .list-unstyled li
+.floaterRight .list-unstyled li, .floaterLeft a
 {
     color: #1d2226;
     text-decoration: none;
@@ -72,7 +83,12 @@ sup.req{
     transition-duration: 0.2s;
 }
 
-.floaterRight .list-unstyled a{
+.floaterLeft a{
+    border-right: none;
+    border-left: 3px solid #4fbe1d;
+}
+
+.floaterRight .list-unstyled a, .floaterLeft a{
     text-decoration: none;
     color: #1d2226;
 }
@@ -93,7 +109,7 @@ h3, .dxa-underlined{
     transition-duration: 0.2s;
 }
 
-.dxa-popular p:hover, .floaterRight .list-unstyled li:hover{
+.dxa-popular p:hover, .floaterRight .list-unstyled li:hover,.floaterLeft a:hover{
     font-size: 1.4rem;
     border-left: 8px solid #4fbe1d;
     border-bottom: 2px solid #4fbe1d;
