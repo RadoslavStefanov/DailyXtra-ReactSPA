@@ -3,20 +3,29 @@ import style from './Profile.module.css';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
 import EditUserModal from './editUserModal';
-import { getUserPreferences } from "../../../services/usersService";
+import { getUserPreferences, needLoginMsg } from "../../../services/usersService";
 import { fixSortOrderLabel } from "../../../services/articlesGetter";
 import { getNewGuid } from "../../../services/Helper";
+import { useNavigate } from "react-router-dom";
 
 
 function Profile() {
 
     document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
+    const navigate = useNavigate();
+
 
     const { isUserLogged, dxaUser } = useContext(AuthContext);
     const [preferences, setPreferences] = useState();
 
     useEffect(() => 
     {   
+        if( !isUserLogged() )
+        {
+            needLoginMsg();
+            navigate("/");
+        }
+
         if(preferences)
         {
             getUserPreferences()

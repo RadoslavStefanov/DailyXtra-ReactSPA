@@ -1,6 +1,8 @@
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, updateProfile  } from "firebase/auth";
 import { getDatabase, ref, set, get, child, onValue } from "firebase/database";
 import { toast } from "react-toastify";
+import { AuthContext } from "../components/Contexts/AuthContext";
+import { useContext } from "react";
 
 let errorMessages = {
     452: "{452} Please fill all required fields!",
@@ -20,6 +22,7 @@ let errorMessages = {
     466: "{466} You need to have at least one filter to set preferences!",
     467: "{467} This article is already in your saved collection!",
     468: "{468} This article is NOT in your collection!",
+    469: "{469} Only logged users can access this page!!",
     512: "{512} Server error occurred! Please try again later!"
 }
 
@@ -42,7 +45,6 @@ let registerRequiredField = [
     `password`,
     `passwordConfirm`
 ]
-
 
 export const getUserInfo = async () => 
 {   
@@ -308,6 +310,9 @@ export const saveArticle = async (id) => {
         return false;
     }
 }
+
+export function needLoginMsg()
+{toast.error(errorMessages[469])}
  
 async function createUser(values, navHook)
 {

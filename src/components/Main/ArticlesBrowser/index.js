@@ -6,7 +6,7 @@ import { getArticles, getFilteredArticles } from '../../../services/articlesGett
 import style from './ArticlesBrowser.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Filter from '../Filter';
-import { getUserPreferences, preventNotLogged, saveArticle } from '../../../services/usersService';
+import { getUserPreferences, needLoginMsg, saveArticle } from '../../../services/usersService';
 import { AuthContext } from '../../Contexts/AuthContext';
 import { calcTimeAgo, disableLoading, getNewGuid, toggleLoading } from '../../../services/Helper';
 
@@ -68,8 +68,13 @@ export default function ArticlesBrowser({tab})
         });
 
     useEffect(() => 
-    {   
-        preventNotLogged(tab, navigate);
+    {
+        if((tab !=="global" && tab !== "hot") && !isUserLogged())
+        {
+            needLoginMsg();
+            navigate("/");
+        }
+
 
         if(content.tabKey!==tab)
         {
