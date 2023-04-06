@@ -14,6 +14,7 @@ import style from './Main.module.css';
 import { useContext } from 'react';
 import { AuthContext } from '../Contexts/AuthContext';
 import Profile from '../UserOps/Profile';
+import SavedNews from '../UserOps/SavedNews';
 
 function Main() {
   const { isUserLogged } = useContext(AuthContext);
@@ -48,6 +49,7 @@ function Main() {
                 <Route path="/hot" element={<ArticlesBrowser tab={"hot"}/>}/>
                 <Route path="/filter" element={<ArticlesBrowser tab={"filter"}/>}/>
                 <Route path="/foryou" element={<ArticlesBrowser tab={"foryou"}/>}/>
+                <Route path="/savednews" element={<SavedNews/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/register" element={<Register/>}/>
@@ -55,7 +57,7 @@ function Main() {
                 <Route path="/subscribe" element={<Subscribe/>}/>
                 <Route path="/article/:id" element={<ArticlesInfo/>}/>
           </Routes>
-          <Col md={3} className="position-sticky">
+          <Col md={3} className="position-sticky profileFloater">
             <UserPanel/>
           </Col>
         </Row>

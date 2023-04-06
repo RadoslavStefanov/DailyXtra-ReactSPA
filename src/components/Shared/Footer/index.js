@@ -4,40 +4,11 @@ import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-k
 export default function Footer() {
   return (
     <MDBFooter bgColor='light' className='text-center text-lg-start text-muted'>
-      <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
-        <div className='me-5 d-none d-lg-block'>
-          <span>Get connected with us on social networks:</span>
-        </div>
-
-        <div>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon color='secondary' fab icon='twitter' />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon color='secondary' fab icon='twitter' />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon color='secondary' fab icon='google' />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon color='secondary' fab icon='instagram' />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon color='secondary' fab icon='linkedin' />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon color='secondary' fab icon='github' />
-          </a>
-        </div>
-      </section>
-
       <section className=''>
         <MDBContainer className='text-center text-md-start mt-5'>
-          <MDBRow className='mt-3'>
+          <MDBRow className='mt-3 pt-5'>
             <MDBCol md='3' lg='4' xl='3' className='mx-auto mb-4'>
-              <h6 className='text-uppercase fw-bold mb-4'>
-                DailyXtra
-              </h6>
+              <img src="/images/nav-logo.png" style={{ width:"40%" }} alt='logo'/>
               <p>
                 DailyXtra is a cutting-edge web app that provides users with up-to-date news from over 150,000 different news sites. Founded in late 2019, our company is committed to delivering the latest information on a wide range of topics, from business and politics to technology and entertainment.
               </p>
@@ -47,22 +18,17 @@ export default function Footer() {
               <h6 className='text-uppercase fw-bold mb-4'>Products</h6>
               <p>
                 <a href='#!' className='text-reset'>
-                  Angular
+                  API Connections
                 </a>
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  React
+                  Pro Plan
                 </a>
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  Vue
-                </a>
-              </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Laravel
+                  Ads
                 </a>
               </p>
             </MDBCol>
@@ -76,12 +42,12 @@ export default function Footer() {
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  Settings
+                  Preferences
                 </a>
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  Orders
+                  Forms
                 </a>
               </p>
               <p>
@@ -99,7 +65,7 @@ export default function Footer() {
               </p>
               <p>
                 <MDBIcon color='secondary' icon='envelope' className='me-3' />
-                info@example.com
+                R.Stefanov@dxa.com
               </p>
               <p>
                 <MDBIcon color='secondary' icon='phone' className='me-3' /> + 01 234 567 88
@@ -113,9 +79,9 @@ export default function Footer() {
       </section>
 
       <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
-        © 2021 Copyright:
-        <a className='text-reset fw-bold' href='https://mdbootstrap.com/'>
-          MDBootstrap.com
+        © 2023 Copyright:
+        <a className='text-reset fw-bold' href=''>
+          DailyXtra.com
         </a>
       </div>
     </MDBFooter>

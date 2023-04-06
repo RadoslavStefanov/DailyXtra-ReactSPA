@@ -18,6 +18,8 @@ let errorMessages = {
     464: "{464} There is no change to the username!",
     465: "{465} There is no change to the image URL!",
     466: "{466} You need to have at least one filter to set preferences!",
+    467: "{467} This article is already in your saved collection!",
+    468: "{468} This article is NOT in your collection!",
     512: "{512} Server error occurred! Please try again later!"
 }
 
@@ -28,7 +30,9 @@ let notificationMessages = {
     107: "{107} Aticle added to favorites!",
     108: "{108} You are logged in automatically!",
     109: "{109} Successfully logged in!",
-    110: "{110} Successfully applied changed!"
+    110: "{110} Successfully applied changed!",
+    111: "{111} Article was saved successfully!",
+    112: "{112} Article was removed successfully!"
 }
 
 let registerRequiredField = [
@@ -257,6 +261,80 @@ export const getUserPreferences = async () => {
     });
 }
 
+export const getUserSavedArticles = async () => {
+    const auth = getAuth();
+    const dbRef = ref(getDatabase());
+    return get(child(dbRef, `usersDetails/${auth.currentUser.uid}/SavedArticles`)).then((snapshot) => 
+    {
+        if (snapshot.exists()) 
+        {
+            return snapshot.val().entries;       
+        } 
+        else 
+        {return null;}
+    })
+    .catch((error) => {
+        toast.error(error.message);
+        return false;
+    });
+}
+
+export const removeSavedArticle = async (id) =>{
+    try
+    {
+        debugger
+        let entries = await getUserSavedArticles();
+
+        if(!entries)
+        {
+            toast.error(errorMessages[468]);
+            return false;
+        }
+        else if(entries.includes(id))
+            entries.filter(e => e === id)    
+
+        const auth = getAuth();
+        const db = getDatabase();
+        ref(db, 'usersDetails/' + auth.currentUser.uid + "/SavedArticles") ;
+        set(ref(db, 'usersDetails/' + auth.currentUser.uid + "/SavedArticles"), {    
+            entries
+        });         
+        toast.success(notificationMessages[112])       
+    }
+    catch(e)
+    {
+        toast.error(errorMessages[e.message]);
+        return false;
+    }
+}
+
+export const saveArticle = async (id) => {
+    try
+    {
+        let entries = await getUserSavedArticles();
+
+        if(!entries)
+            entries = [id];
+        else if(entries.includes(id))
+        {toast.error(errorMessages[467]); return null;}        
+        else
+            entries.push(id);
+
+        const auth = getAuth();
+        const db = getDatabase();
+        ref(db, 'usersDetails/' + auth.currentUser.uid + "/SavedArticles") ;
+        set(ref(db, 'usersDetails/' + auth.currentUser.uid + "/SavedArticles"), {    
+            entries
+        });         
+        toast.success(notificationMessages[111])       
+    }
+    catch(e)
+    {
+        toast.error(errorMessages[e.message]);
+        return false;
+    }
+}
+ 
 async function createUser(values, navHook)
 {
     const auth = getAuth();

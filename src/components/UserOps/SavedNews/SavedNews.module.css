@@ -1,0 +1,140 @@
+.contentTable{
+    width: 100%;
+}
+
+.errorDiv{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #3a3d40;
+    gap: 10px;
+    line-height: 2;
+}
+
+.errorDiv > strong{
+    font-size: 1.6rem;
+}
+
+.pageExample{
+    color: rgb(55, 155, 9);
+    border: 1px solid rgb(79, 190, 29);
+    padding: 0 0.2rem 0.2rem 0;
+    border-radius: 0.5rem;
+}
+
+.errorDiv img{
+    width: 30rem;
+}
+
+.contentTable .articleRow{
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.contentTable td{
+    width: 100%;
+    display: block;
+}
+
+.contentTable tr:nth-of-type(2n) {
+    background-color: rgb(255, 255, 255);
+    border-right: 5px solid lightgray;
+}
+
+.contentTable tr:nth-of-type(odd) {
+    background-color: rgb(240, 255, 240);
+    border-left: 5px solid rgb(79, 190, 29);
+}
+
+.contentTable .articleHeader{
+    font-size: 1.3rem;
+    color: #3a3d40;
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.contentTable .articleHeader:hover{
+    text-decoration: underline;
+}
+
+.contentTable .articleImage{
+    background-size: cover!important;
+    height: 170px;
+    max-width: 40%;
+    max-height: 100%;
+    width: 170px;
+    float: left;
+    margin: 0.5rem;
+    margin-bottom: -0.2rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border: 1px solid rgb(79, 190, 29);
+}
+
+.articleDescription{
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.articleControls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.articleControlsItem {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #3a3d40;
+}
+
+.articleDisabledControlsItem{
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #3a3d40;
+    filter: grayscale(1);
+    background: #f0f0f0;
+    pointer-events: none;
+}
+
+.articleControlsItem:hover{
+    background-color: #4fbe1d;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+}
+
+.loadMoreBtn{
+    display: block;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    border: none;
+    border-left: 3px dashed #4fbe1d;
+}
+
+.loadMoreBtn:hover{
+    background: #d2ffbe;
+    transition: ease;
+    transition-duration: 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+.articleControlsItem {
+    flex: none;
+    width: calc(50% - 10px);
+}
+}
+
+@media screen and (max-width: 480px) {
+.articleControlsItem {
+    width: 100%;
+}
+}

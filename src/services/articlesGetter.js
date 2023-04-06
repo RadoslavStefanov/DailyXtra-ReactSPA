@@ -1,5 +1,6 @@
 import { getNewsKey } from "../sysInfo/secrets";
 import { urlHasImage } from "./Helper";
+import { getUserSavedArticles } from "./usersService";
 
 //Defaults
 let searchConfig =
@@ -54,6 +55,13 @@ export const getArticleById = async (articleId) => {
 
     return result.articles.results[0];
 }
+
+export const getSavedArticles = async () => {
+    const savedArticles = await getUserSavedArticles();
+    const articlePromises = savedArticles.map((a) => getArticleById(a));
+    const articles = await Promise.all(articlePromises);
+    return articles;
+};
 
 function generatePathFromFilter({filterObj}, pageNumber, isForYou)
 {

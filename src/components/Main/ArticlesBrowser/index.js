@@ -6,7 +6,7 @@ import { getArticles, getFilteredArticles } from '../../../services/articlesGett
 import style from './ArticlesBrowser.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Filter from '../Filter';
-import { getUserPreferences, preventNotLogged } from '../../../services/usersService';
+import { getUserPreferences, preventNotLogged, saveArticle } from '../../../services/usersService';
 import { AuthContext } from '../../Contexts/AuthContext';
 import { calcTimeAgo, disableLoading, getNewGuid, toggleLoading } from '../../../services/Helper';
 
@@ -110,7 +110,7 @@ export default function ArticlesBrowser({tab})
             {preferences && tab==="foryou" &&
                 <>
                     <h5>Preferences applied:</h5>
-                    <sup style={{display:"block", margin:"1rem 0"}}>*You can change these preferences by applying a new filter in "Search" and saving it!</sup>
+                    <p style={{display:"block", margin:"1rem 0"}}>*You can change these preferences by applying a new filter in "Search" and saving it!</p>
                     {preferences && Object.keys(preferences).map(k =>
                     ( 
                         <div key={getNewGuid()} style={{display:"inline"}}>
@@ -144,7 +144,7 @@ export default function ArticlesBrowser({tab})
                                         <Link to={`/article/${article.uri}`} className={style.articleControlsItem}>| 👁️View</Link>
                                         <a href={""+article.url} className={style.articleControlsItem}>| 📑Check original</a>
                                         {isUserLogged() ? 
-                                            <a className={style.articleControlsItem}>| 📜Read later</a>
+                                            <a className={style.articleControlsItem} onClick={() => {saveArticle(`${article.uri}`)}}>| 📜Read later</a>
                                             :
                                             <a className={style.articleDisabledControlsItem}>| 📜Read later</a>
                                         }

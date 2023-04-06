@@ -20,7 +20,7 @@ export default function UserPanel()
                         </div>
                         <ul className="list-unstyled">
                             <li><Link to="profile">Profile 👤</Link></li>
-                            <li>Saved news 📜</li>
+                            <li><Link to="savednews">Saved news 📜</Link></li>
                             <li><Link to="profile">Prefences 🎭</Link></li>
                             <li onClick={logOut}>Logout 🔐</li>
                         </ul>
