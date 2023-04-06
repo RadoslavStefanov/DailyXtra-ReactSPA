@@ -126,6 +126,12 @@ a.selected{
     .profileFloater
     { order: 1; }
 
+    .container-fluid .row .col-md-6
+    { order: 2; }
+
+    .container-fluid .row .border-right.col-md-3
+    { order: 3; }
+
     .container-fluid{
         padding: 0 0.3rem!important;
     }
@@ -153,12 +159,6 @@ a.selected{
         padding: 0 0.4rem;
     }
 
-    .row :nth-child(2)
-    { order: 2; }
-
-    .row :nth-child(1)
-    { order: 3; }
-
     .floaterLeft img, .floaterLeft h3{
         margin: 0 auto;
         display: block;
@@ -176,7 +176,7 @@ a.selected{
         justify-content: space-around;
     }
     
-    sup{
-        display: block;
-    }
+    td a
+    {width: fit-content!important;}
+
 }

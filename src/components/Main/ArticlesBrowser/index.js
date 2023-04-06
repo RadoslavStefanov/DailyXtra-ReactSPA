@@ -139,7 +139,7 @@ export default function ArticlesBrowser({tab})
                                     </p>
                                     <p className={style.articleDescription}>{article.body.substring(0,100)+" ..."}</p>
                                 </div>
-                                <div style={{display:"block"}}>
+                                <div style={{display:"block"}} className='articleConstrolsWrapper'>
                                     <div className={style.articleControls}>
                                         <Link to={`/article/${article.uri}`} className={style.articleControlsItem}>| 👁️View</Link>
                                         <a href={""+article.url} className={style.articleControlsItem}>| 📑Check original</a>
