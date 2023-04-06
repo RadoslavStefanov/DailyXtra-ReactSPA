@@ -42,7 +42,7 @@ function Login() {
             </div>
 
             <div className="text-center">
-                <p>Not a member? <Link to="/register">Register</Link></p>{/*MARK! Change this to a link to register page*/}
+                <p>Not a member? <Link to="/register">Register</Link></p>
             </div>
         </Form>
         </div>

@@ -147,16 +147,6 @@ export async function editUser(data,dxaUser,handleClose)
     handleClose();
 }
 
-export function preventNotLogged(tab, navHook)
-{
-    //MARK! Check what to do with this function
-    if((tab==="foryou" || tab==="filter") && false)
-    {
-        navHook('/login');
-        toast.error("You need to be logged in to open this page!")
-    }      
-}
-
 export async function registerUser(values, navHook)
 {
     try
