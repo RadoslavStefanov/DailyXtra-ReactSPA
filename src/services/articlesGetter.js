@@ -32,6 +32,7 @@ export const getArticles = async ({pageNumber, tabKey}) => {
 }
 
 export const getFilteredArticles = async ({pageNumber}, filterObj, isForYou) => {
+    debugger
     let pathSuffix = generatePathFromFilter({filterObj} ,pageNumber, isForYou)    
     let fetchUrl = `${searchConfig._baseUrl}${pathSuffix}&apiKey=${getNewsKey()}`; 
 
@@ -75,12 +76,16 @@ function generatePathFromFilter({filterObj}, pageNumber, isForYou)
     else
     {
         if(filterObj.keywords && filterObj.keywords.length > 0)
-        {searchObj.keyword = filterObj.keywords.slice(0, 5).map(obj => obj).join(',');}
+        {searchObj.keyword = filterObj.keywords}
 
         if(filterObj.language && filterObj.language.length > 0)
         {
-            filterObj.language = filterObj.language.map(l => l === "English" ? "eng": "bul")
-            searchObj.lang = filterObj.language.slice(0, 5).map(obj => obj).join(',');
+            searchObj.lang = filterObj.language
+            .split(', ')
+            .map(l => l === "English" ? "eng": "bul")
+            .slice(0, 5)
+            .map(obj => obj)
+            .join(',');
         }
     }
     
@@ -110,6 +115,10 @@ function generatePathFromFilter({filterObj}, pageNumber, isForYou)
             }
         });
     console.log(urlSuffix)
+
+    if(isForYou)
+        filterObj.sortOrder = fixSortOrderLabel(filterObj.sortOrder);
+
     return(urlSuffix);
 }
 
@@ -128,4 +137,16 @@ function stringifyCriterias()
     }
 
     return str;
+}
+
+function fixSortOrderLabel(input)
+{
+    debugger
+    let labelMap = {
+        "rel": "Relevancy",
+        "date": "Date",
+        "socialScore": "Rank"
+    }
+
+    return labelMap[input]
 }

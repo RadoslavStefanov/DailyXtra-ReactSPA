@@ -233,12 +233,23 @@ export const getUserPreferences = async () => {
     const dbRef = ref(getDatabase());
     return get(child(dbRef, `usersDetails/${auth.currentUser.uid}`)).then((snapshot) => 
     {
-        if (snapshot.exists()) {
-            return snapshot.val()
+        if (snapshot.exists()) 
+        {
+            let resultObj = snapshot.val().Preferences;
+            let normalizedPreferencesObj = {}
+            
+            Object.keys(resultObj).forEach(p => 
+            {
+                if(Array.isArray(resultObj[p]))
+                    normalizedPreferencesObj[p] = resultObj[p].join(',');
+                else
+                    normalizedPreferencesObj[p] = resultObj[p];
+            })
+
+            return normalizedPreferencesObj;            
         } 
-        else {
-            return null;
-        }
+        else 
+        {return null;}
     })
     .catch((error) => {
         toast.error(error.message);

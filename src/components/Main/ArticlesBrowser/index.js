@@ -84,15 +84,20 @@ export default function ArticlesBrowser({tab})
         if(tab === "foryou")
             getUserPreferences()
             .then( res => 
-            {   setPreferences(res.Preferences);
-                getFilteredArticles(content, res.Preferences, true)
-                .then(a=> setArticles(a))
-                .catch(err =>{console.error(err)});
+            {   setPreferences(res);
+                if(res)
+                {
+                    getFilteredArticles(content, res, true)
+                    .then(a=> setArticles(a))
+                    .catch(err =>{console.error(err)});
+                }                
             })     
+
         else if(tab !== "filter" && tab !== "foryou")
             getArticles(content)
             .then(a=> setArticles(a))
             .catch(err =>{console.error(err)});
+
         else if(filterResult.isApplied)
             getFilteredArticles(content,filterResult)
             .then(a=> setArticles(a))
@@ -105,11 +110,15 @@ export default function ArticlesBrowser({tab})
             <Col md={6} style={{minHeight:"720px"}}>
             {preferences && tab==="foryou" &&
                 <>
-                    <h5>Filters applied:</h5>
-                    <sup style={{display:"block", margin:"1rem 0"}}>*You can change these filters by applying a new filter in "Search" and saving it!</sup>
+                    <h5>Preferences applied:</h5>
+                    <sup style={{display:"block", margin:"1rem 0"}}>*You can change these preferences by applying a new filter in "Search" and saving it!</sup>
                     {preferences && Object.keys(preferences).map(k =>
                     ( 
-                       <Button variant='success' style={{margin:"0 1rem 2rem 0"}} >{preferences[k]}</Button>
+                        <>
+                            {(preferences[k] && 
+                                <Button variant='success' style={{margin:"0 1rem 2rem 0",backgroundColor:"#4fbe1d"}} >{`${k} = ${preferences[k]}`}</Button>
+                            )}
+                        </>                       
                     )
                     )}
                 </>
@@ -136,13 +145,9 @@ export default function ArticlesBrowser({tab})
                                         <Link to={`/article/${article.uri}`} className={style.articleControlsItem}>| 👁️View</Link>
                                         <a href={""+article.url} className={style.articleControlsItem}>| 📑Check original</a>
                                         {isUserLogged() ? 
-                                            <>
-                                                <a className={style.articleControlsItem}>| 📜Read later</a>
-                                            </>                                            
+                                            <a className={style.articleControlsItem}>| 📜Read later</a>
                                             :
-                                            <>
-                                                <a className={style.articleDisabledControlsItem}>| 📜Read later</a>
-                                            </>
+                                            <a className={style.articleDisabledControlsItem}>| 📜Read later</a>
                                         }
                                         
                                     </div>
@@ -152,6 +157,14 @@ export default function ArticlesBrowser({tab})
                         ))}
                     </tbody>
                 </table>
+            }
+
+            {!preferences && tab==="foryou" &&
+                <div className={style.errorDiv}>
+                    <img src="/images/missingPreferences.png"/>
+                    <strong>Missing preferences!</strong>
+                    <p>To take advantage of the <strong className={style.pageExample}>❤️ For You</strong> page, select a filter in the <strong className={style.searchExample}>🔎 Search</strong>  page and click the <strong className={style.saveExample}>❤️ Save</strong> button.</p>
+                </div>
             }
         
             {tab !== "hot" && tab !== "filter" && articles.length > 0&& 

@@ -2,6 +2,40 @@
     width: 100%;
 }
 
+.errorDiv{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #3a3d40;
+    gap: 10px;
+}
+
+.errorDiv > strong{
+    font-size: 1.6rem;
+}
+
+.saveExample{
+    color: red;
+    border: 1px solid pink;
+}
+
+.searchExample, .pageExample{
+    color: rgb(55, 155, 9);
+    border: 1px solid rgb(79, 190, 29);
+    
+}
+
+.saveExample, .searchExample, .pageExample{
+    padding: 0 0.2rem 0.2rem 0;
+    border-radius: 0.5rem;
+}
+
+.errorDiv img{
+    width: 30rem;
+}
+
 .contentTable .articleRow{
     display: block;
     margin-bottom: 1rem;
