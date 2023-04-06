@@ -25,6 +25,7 @@ To get started with DailyXtra, you will need to follow these steps:
 - React Toast
 - NewsAPI.ai news sweeper
 - React router
+- Undraw image library
 
 #Pictures
 ![image](https://user-images.githubusercontent.com/72268734/226148642-26bf999a-62db-4dab-91a8-700f881c0595.png)
