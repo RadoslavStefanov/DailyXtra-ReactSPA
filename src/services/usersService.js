@@ -233,6 +233,7 @@ export async function setUserPreferences(filterData)
 }
 
 export const getUserPreferences = async () => {  
+    debugger
     const auth = getAuth();
     const dbRef = ref(getDatabase());
     return get(child(dbRef, `usersDetails/${auth.currentUser.uid}`)).then((snapshot) => 
@@ -240,6 +241,10 @@ export const getUserPreferences = async () => {
         if (snapshot.exists()) 
         {
             let resultObj = snapshot.val().Preferences;
+
+            if(!resultObj)
+                return null;
+
             let normalizedPreferencesObj = {}
             
             Object.keys(resultObj).forEach(p => 
