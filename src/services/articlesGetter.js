@@ -141,7 +141,6 @@ function stringifyCriterias()
 
 export function fixSortOrderLabel(input)
 {
-    debugger
     let labelMap = {
         "rel": "Relevancy",
         "date": "Date",

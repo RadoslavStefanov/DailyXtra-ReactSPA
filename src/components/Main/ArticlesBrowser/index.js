@@ -10,6 +10,7 @@ import { disableLoading, toggleLoading } from '../../../services/loadMoreBtnFunc
 import Filter from '../Filter';
 import { getUserPreferences, preventNotLogged } from '../../../services/usersService';
 import { AuthContext } from '../../Contexts/AuthContext';
+import { getNewGuid } from '../../../services/Helper';
 
 
 export default function ArticlesBrowser({tab})
@@ -114,11 +115,11 @@ export default function ArticlesBrowser({tab})
                     <sup style={{display:"block", margin:"1rem 0"}}>*You can change these preferences by applying a new filter in "Search" and saving it!</sup>
                     {preferences && Object.keys(preferences).map(k =>
                     ( 
-                        <>
+                        <div key={getNewGuid()} style={{display:"inline"}}>
                             {(preferences[k] && 
-                                <Button variant='success' style={{margin:"0 1rem 2rem 0",backgroundColor:"#4fbe1d", color:"black", fontWeight:"700"}} >{`${k} = ${preferences[k]}`}</Button>
+                                <Button variant='success' style={{margin:"0 1rem 2rem 0",backgroundColor:"white", color:"#45a419", fontWeight:"700"}} >{`${k} = ${preferences[k]}`}</Button>
                             )}
-                        </>                       
+                        </div>                       
                     )
                     )}
                 </>

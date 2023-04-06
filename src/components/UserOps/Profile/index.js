@@ -5,6 +5,7 @@ import { AuthContext } from "../../Contexts/AuthContext";
 import EditUserModal from './editUserModal';
 import { getUserPreferences } from "../../../services/usersService";
 import { fixSortOrderLabel } from "../../../services/articlesGetter";
+import { getNewGuid } from "../../../services/Helper";
 
 
 function Profile() {
@@ -21,10 +22,15 @@ function Profile() {
             getUserPreferences()
             .then( res => 
             {   
-                if(res.sortOrder)
-                    res.sortOrder = fixSortOrderLabel(res.sortOrder);
-                setPreferences(res);  
-                console.log(res)
+                if(Object.keys(res).length > 0)
+                {
+                    if(Object.keys(res).includes("sortOrder") && res.sortOrder)
+                        res.sortOrder = fixSortOrderLabel(res.sortOrder);
+
+                    setPreferences(res);  
+                    console.log(res)
+                }
+                
             })  
         }          
     },[preferences])
@@ -61,11 +67,11 @@ function Profile() {
                     <p>*You can change these preferences by applying a new filter in "Search" and saving it!</p>
                     {preferences && Object.keys(preferences).map(k =>
                     ( 
-                        <>
+                        <div key={getNewGuid()} style={{display:"inline"}}>
                             {(preferences[k] && 
-                                <Button variant='success' style={{margin:"0 1rem 2rem 0",backgroundColor:"#14992a", fontWeight:"700"}} >{`${k} = ${preferences[k]}`}</Button>
+                                <Button variant='success' style={{margin:"0 1rem 2rem 0",backgroundColor:"white", color:"#45a419", fontWeight:"700"}} >{`${k} = ${preferences[k]}`}</Button>
                             )}
-                        </>                       
+                        </div>                       
                     )
                     )}
                 </div>
