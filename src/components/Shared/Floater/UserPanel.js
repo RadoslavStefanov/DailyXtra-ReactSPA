@@ -2,9 +2,12 @@ import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { Link } from "react-router-dom";
 
+
 export default function UserPanel()
 {
     const { isUserLogged, dxaUser, logOut } = useContext(AuthContext);
+    
+
     return(
         <>
             {isUserLogged() ? 
@@ -18,7 +21,7 @@ export default function UserPanel()
                         <ul className="list-unstyled">
                             <li><Link to="profile">Profile 👤</Link></li>
                             <li>Saved news 📜</li>
-                            <li>Prefences 🎭</li>
+                            <li><Link to="profile">Prefences 🎭</Link></li>
                             <li onClick={logOut}>Logout 🔐</li>
                         </ul>
                     </div>                                   

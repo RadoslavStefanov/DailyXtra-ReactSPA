@@ -20,3 +20,16 @@
 .userInfo p{
     font-size: 1.2rem;
 }
+
+.profilePreferences{
+    display: inline-block;
+    margin-top: 3rem;
+}
+
+.profilePreferences p{
+    margin-top: 0;
+}
+
+.profilePreferences h5{
+    margin-bottom: 0;
+}

@@ -139,7 +139,7 @@ function stringifyCriterias()
     return str;
 }
 
-function fixSortOrderLabel(input)
+export function fixSortOrderLabel(input)
 {
     debugger
     let labelMap = {

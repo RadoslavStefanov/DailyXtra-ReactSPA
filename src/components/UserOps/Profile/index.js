@@ -2,14 +2,33 @@ import { Button, Col } from "react-bootstrap";
 import style from './Profile.module.css';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
-import { getUserInfo } from "../../../services/usersService";
 import EditUserModal from './editUserModal';
+import { getUserPreferences } from "../../../services/usersService";
+import { fixSortOrderLabel } from "../../../services/articlesGetter";
+
 
 function Profile() {
 
     document.querySelectorAll("a.selected").forEach(a=>a.classList.remove("selected"));
 
     const { isUserLogged, dxaUser } = useContext(AuthContext);
+    const [preferences, setPreferences] = useState({});
+
+    useEffect(() => 
+    {   
+        if(Object.keys(preferences).length==0)
+        {
+            getUserPreferences()
+            .then( res => 
+            {   
+                if(res.sortOrder)
+                    res.sortOrder = fixSortOrderLabel(res.sortOrder);
+                setPreferences(res);  
+                console.log(res)
+            })  
+        }          
+    },[preferences])
+
   
     return (
       <Col md={6} style={{minHeight:"720px"}}>
@@ -28,14 +47,28 @@ function Profile() {
                             <p><strong>📛 Username: </strong>{dxaUser.displayName}</p>
                             <EditUserModal 
                                 dxaUser = {dxaUser}
-                            />
-                                  
+                            />                                  
                         </div>
                 </div>
                 </>
                 :
                 <h4>You need to be logged in to view this page!</h4>
                 
+            }
+            {preferences&&
+                <div className={style.profilePreferences}>
+                    <h5>🎭 Preferences:</h5>
+                    <p>*You can change these preferences by applying a new filter in "Search" and saving it!</p>
+                    {preferences && Object.keys(preferences).map(k =>
+                    ( 
+                        <>
+                            {(preferences[k] && 
+                                <Button variant='success' style={{margin:"0 1rem 2rem 0",backgroundColor:"#14992a", fontWeight:"700"}} >{`${k} = ${preferences[k]}`}</Button>
+                            )}
+                        </>                       
+                    )
+                    )}
+                </div>
             }
         </>
       }                        

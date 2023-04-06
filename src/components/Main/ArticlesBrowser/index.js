@@ -116,7 +116,7 @@ export default function ArticlesBrowser({tab})
                     ( 
                         <>
                             {(preferences[k] && 
-                                <Button variant='success' style={{margin:"0 1rem 2rem 0",backgroundColor:"#4fbe1d"}} >{`${k} = ${preferences[k]}`}</Button>
+                                <Button variant='success' style={{margin:"0 1rem 2rem 0",backgroundColor:"#4fbe1d", color:"black", fontWeight:"700"}} >{`${k} = ${preferences[k]}`}</Button>
                             )}
                         </>                       
                     )
