@@ -125,12 +125,7 @@ export async function editUser(data,dxaUser,handleClose)
         toast.error(errorMessages[457]);
         return;
     }
-
-    if(data.profile_picture === dxaUser.photoURL){
-        toast.error(errorMessages[465]);
-        return;
-    }
-
+    
     if(data.profile_picture.length<=0)
         data.profile_picture = "https://www.pngfind.com/pngs/m/188-1886054_confused-person-png-surprise-guest-transparent-png.png"
     else
