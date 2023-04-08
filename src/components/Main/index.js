@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import ArticlesInfo from './ArticleInfo';
 import ArticlesBrowser from './ArticlesBrowser';
 import DXACarousel from "./Carousel";
@@ -11,7 +11,7 @@ import AboutUs from '../GenericPages/AboutUs';
 import Subscribe from '../GenericPages/Subscription';
 
 import style from './Main.module.css';
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { AuthContext } from '../Contexts/AuthContext';
 import Profile from '../UserOps/Profile';
 import SavedNews from '../UserOps/SavedNews';
@@ -19,11 +19,19 @@ import SavedNews from '../UserOps/SavedNews';
 function Main() {
   const { isUserLogged } = useContext(AuthContext);
 
+  const containerRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    containerRef.current.scrollIntoView({ behavior: 'smooth' });
+  }, [location]);
+
+
 
   return (
     <>
       <DXACarousel/>
-      <ul className={style.browserTabs}>
+      <ul className={style.browserTabs} ref={containerRef}>
           <Link to="/" id="global">🌐Global</Link>
           <Link to="/hot" id="hot">🔥Hot</Link>
           {isUserLogged() ? 
