@@ -41,12 +41,11 @@ export default function ArticlesBrowser({tab})
 
         if(tab === "filter")
         {
-            getFilteredArticles(content)
+            getFilteredArticles(content,filterResult)
             .then(a=> setArticles([...articles, ...a]))
-            .catch(err => { console.error(err);  content.pageNumber = content.pageNumber-1; });
+            .catch(err => { console.error(err); });
         }   
-        if(tab === "foryou")
-        
+        else if(tab === "foryou")        
         {
             getUserPreferences()
             .then( res => 
