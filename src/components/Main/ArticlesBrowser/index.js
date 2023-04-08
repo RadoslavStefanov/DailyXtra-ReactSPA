@@ -44,7 +44,21 @@ export default function ArticlesBrowser({tab})
             getFilteredArticles(content)
             .then(a=> setArticles([...articles, ...a]))
             .catch(err => { console.error(err);  content.pageNumber = content.pageNumber-1; });
-        }    
+        }   
+        if(tab === "foryou")
+        
+        {
+            getUserPreferences()
+            .then( res => 
+            {   setPreferences(res);
+                if(res)
+                {
+                    getFilteredArticles(content, res, true)
+                    .then(a=> setArticles([...articles, ...a]))
+                    .catch(err =>{console.error(err)});
+                }                
+            })    
+        } 
         else
         {
             getArticles(content)
