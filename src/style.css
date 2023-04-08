@@ -183,6 +183,9 @@ a.selected{
     .floaterLeft p, .floaterLeft .my-4
     {margin: 0!important; font-size: 0.8rem;}
 
+    .floaterLeft p, .floaterLeft .my-4 a
+    {margin: 0!important; font-size: 1rem;}
+
     .dxa-popular
     {width: 100%;}
 
