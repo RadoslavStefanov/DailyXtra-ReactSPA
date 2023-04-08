@@ -26,8 +26,9 @@ function Profile() {
             navigate("/");
         }
 
-        if(preferences)
+        if(!preferences)
         {
+            debugger;
             getUserPreferences()
             .then( res => 
             {   
