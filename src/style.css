@@ -201,3 +201,8 @@ a.selected{
     html,body
     {overflow-x: hidden;}
 }
+
+@media screen and (max-width: 376px) {
+    .floaterLeft p, .floaterLeft .my-4 a
+    {margin: 0!important; font-size: 0.8rem;}
+}
